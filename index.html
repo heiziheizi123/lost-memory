@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新城关小学吧-百度贴吧</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; background-color: #dee4ed; color: #333; }
+        
+        /* 顶部蓝色导航条 */
+        .top-blue-bar { background: #2d8cf0; color: #fff; padding: 10px 15px; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .top-blue-bar .search-icon { font-size: 18px; }
+
+        /* 吧Header区域 - 点击头像或名字进入 chengguan.html */
+        .bar-header-link { text-decoration: none; color: inherit; display: block; }
+        .bar-header { background: #fff; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #d1d7e2; }
+        .bar-avatar { width: 55px; height: 55px; background: #4ba3e3; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: bold; text-align: center; line-height: 1.3; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
+        .bar-info { margin-left: 12px; flex: 1; }
+        .bar-name { font-size: 18px; font-weight: bold; color: #000; display: flex; align-items: center; }
+        .bar-name::after { content: "＋关注"; font-size: 11px; background: #ff4d4f; color: #fff; padding: 2px 6px; border-radius: 3px; margin-left: 8px; font-weight: normal; }
+        .bar-stats { font-size: 11px; color: #777; margin-top: 4px; }
+
+        /* 导航栏 */
+        .nav-tabs { display: flex; background: #fff; border-bottom: 1px solid #d1d7e2; font-size: 14px; }
+        .tab-item { flex: 1; text-align: center; padding: 12px 0; color: #666; position: relative; }
+        .tab-item.active { color: #2d8cf0; font-weight: bold; }
+        .tab-item.active::after { content: ""; position: absolute; bottom: 0; left: 35%; width: 30%; height: 3px; background: #2d8cf0; border-radius: 2px; }
+
+        /* 复古横幅广告位 1 (宠物之家) */
+        .ad-banner-1 { background: #fff; padding: 8px 10px; margin-top: 5px; border-bottom: 1px solid #d1d7e2; }
+        .ad-banner-1 img { width: 100%; border-radius: 4px; display: block; }
+
+        /* 帖子标题区 */
+        .main-post-title { background: #fff; padding: 15px 15px 10px 15px; margin-top: 8px; font-size: 18px; font-weight: bold; color: #000; border-bottom: 1px solid #f0f0f0; line-height: 1.4; }
+
+        /* 楼层基本样式 */
+        .floor { background: #fff; padding: 15px; border-bottom: 1px solid #ecf0f5; }
+        .floor-header { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
+        .avatar-placeholder { width: 32px; height: 32px; background: #ccc; border-radius: 50%; margin-right: 10px; }
+        .user-info { flex: 1; }
+        .username { font-weight: bold; color: #444; }
+        .lz-badge { background: #2d8cf0; color: #fff; font-size: 9px; padding: 1px 3px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+        .floor-num { color: #999; }
+        .floor-content { font-size: 15px; color: #111; word-break: break-all; margin-top: 4px; line-height: 1.6; }
+        
+        /* 游戏线索图片占位 */
+        .evidence-img-box { width: 100%; max-width: 240px; height: 150px; background: #e6ebf2; border: 1px dashed #a0b2cb; margin-top: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #555; font-style: italic; border-radius: 4px; }
+
+        /* 楼中楼回复样式 */
+        .sub-comments { background: #f4f6f9; padding: 8px 12px; border-radius: 4px; margin-top: 12px; font-size: 13px; border: 1px solid #e9edf3; }
+        .sub-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #d1d7e2; line-height: 1.4; }
+        .sub-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .sub-username { color: #2d8cf0; font-weight: bold; }
+
+        /* 复古方块广告位 2 (聊天推广) */
+        .ad-box-2 { background: #fff; margin: 8px 0; padding: 12px; display: flex; align-items: center; border-top: 1px solid #d1d7e2; border-bottom: 1px solid #d1d7e2; background-color: #fcfdfe; }
+        .ad-box-2 .ad-img { width: 50px; height: 50px; background: #2d8cf0; border-radius: 8px; margin-right: 12px; }
+        .ad-box-2 .ad-text { flex: 1; }
+        .ad-box-2 .ad-title { font-size: 14px; font-weight: bold; color: #333; }
+        .ad-box-2 .ad-desc { font-size: 12px; color: #888; margin-top: 2px; }
+        .ad-box-2 .ad-btn { font-size: 12px; border: 1px solid #2d8cf0; color: #2d8cf0; padding: 4px 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-blue-bar">
+        <span>百度贴吧</span>
+        <span class="search-icon">🔍</span>
+    </div>
+
+    <a href="chengguan.html" class="bar-header-link">
+        <div class="bar-header">
+            <div class="bar-avatar">新城关<br>小学吧</div>
+            <div class="bar-info">
+                <div class="bar-name">新城关小学吧</div>
+                <div class="bar-stats">关注：12,405 &nbsp; 帖子：84,132</div>
+            </div>
+        </div>
+    </a>
+
+    <div class="nav-tabs">
+        <div class="tab-item active">看帖</div>
+        <div class="tab-item">图片</div>
+        <div class="tab-item">精品</div>
+    </div>
+
+    <div class="ad-banner-1">
+        <div style="background: #fdf5ec; border: 1px solid #edd5be; padding: 15px; border-radius: 4px; text-align: center; color: #6b3e16;">
+            <h3 style="font-size: 18px; margin-bottom: 4px;">江州市宠物之家</h3>
+            <p style="font-size: 12px; color: #9e7651;">宠物寄养 · 美容 · 医疗</p>
+            <p style="font-size: 10px; color: #ccc; text-align: right; margin-top: 5px;">地址：江州市阳光路32号附1号</p>
+        </div>
+    </div>
+
+    <div class="main-post-title">
+        【13】有人认识这个被墨水挡住的女孩吗
+    </div>
+
+    <div class="floor">
+        <div class="floor-header">
+            <div class="avatar-placeholder" style="background: #ff9900;"></div>
+            <div class="user-info">
+                <div class="username">重演./<span class="lz-badge">楼主</span></div>
+            </div>
+            <div class="floor-num">1楼</div>
+        </div>
+        <div class="floor-content">
+            吧里有20届的同学吗，有人认识这个女生吗，问了身边几个同学大家都说忘记她是谁了。。。说来也怪，明明其他人我们大家都记得，唯独对她没印象，也没有一个人有她的联系方式。
+            <div class="evidence-img-box">
+                [picture1.jpg 毕业照局部]
+            </div>
+        </div>
+    </div>
+
+    <div class="floor">
+        <div class="floor-header">
+            <div class="avatar-placeholder" style="background: #5cadff;"></div>
+            <div class="user-info">
+                <div class="username">用户djfjfjesfv</div>
+            </div>
+            <div class="floor-num">2楼</div>
+        </div>
+        <div class="floor-content">
+            同学，这种情况少打扰人家了，都不记得她谈何寻人。
+            
+            <div class="sub-comments">
+                <div class="sub-item">
+                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>就是太好奇了嘛</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floor">
+        <div class="floor-header">
+            <div class="avatar-placeholder" style="background:#19be6b;"></div>
+            <div class="user-info">
+                <div class="username">雾里藏月</div>
+            </div>
+            <div class="floor-num">3楼</div>
+        </div>
+        <div class="floor-content">
+            我是你隔壁班的，你们班真的有这个人吗？
+            
+            <div class="sub-comments">
+                <div class="sub-item">
+                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>毕业照都在这里了，你这么一说是很吓人。。。</span>
+                </div>
+                <div class="sub-item">
+                    <span class="sub-username">雾里藏月</span>：回复<span>会不会是哪个休学的同学被p上毕业照了？</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ad-box-2">
+        <div class="ad-img" style="display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; font-weight:bold;">💬</div>
+        <div class="ad-text">
+            <div class="ad-title">同城扩列聊天软件</div>
+            <div class="ad-desc">来新城关小学吧，和志同道合的人一起畅聊</div>
+        </div>
+        <div class="ad-btn">下载</div>
+    </div>
+
+    <div class="floor">
+        <div class="floor-header">
+            <div class="avatar-placeholder" style="background:#ccc;"></div>
+            <div class="user-info">
+                <div class="username" style="color: #999; text-decoration: line-through;">用户已注销</div>
+            </div>
+            <div class="floor-num">4楼</div>
+        </div>
+        <div class="floor-content" style="color: #ba1c1c; font-weight: 500; font-family: Georgia, serif;">
+            众里寻他千百度。百十楼中月自明。
+            
+            <div class="sub-comments">
+                <div class="sub-item">
+                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>什么鬼？你没学过语文吗，寻人贴你捣什么乱😂</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floor">
+        <div class="floor-header">
+            <div class="avatar-placeholder" style="background:#9a66e4;"></div>
+            <div class="user-info">
+                <div class="username">看星星的人</div>
+            </div>
+            <div class="floor-num">5楼</div>
+        </div>
+        <div class="floor-content">
+            lz我是你同学，我好像有点印象。
+            
+            <div class="sub-comments">
+                <div class="sub-item">
+                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>你是哪位来着？</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 20px; font-size: 11px; color: #8f9bb3;">
+        ©2026 Baidu 贴吧客户端复古精简版
+    </div>
+
+</body>
+</html>
