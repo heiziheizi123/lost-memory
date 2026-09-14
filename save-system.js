@@ -9,7 +9,7 @@ function loadGame(){
   try{
     let d=JSON.parse(raw);if(!d||d.version!==1)throw new Error('version');
     st.p=new Set(d.p||[]);st.l=new Set(d.l||[]);st.t=new Set(d.t||[]);st.seen=new Set(d.seen||[]);st.items=new Set(d.items||[]);st.sel=d.sel||[];st.rest=new Set(d.rest||[]);st.comb=new Set(d.comb||[]);
-    O.innerHTML=d.output||'';
+    O.innerHTML=(d.output||'').replaceAll('6岁','3岁').replaceAll('六岁','三岁');
     videoPanel.style.display=st.t.has('公开寻人时间')?'block':'none';
     render();renderRestore();sela('存档读取完成。调查状态已恢复。');
   }catch(e){sela('存档数据无法解析。读取终止。');}
@@ -18,13 +18,21 @@ function newGame(){
   if(!confirm('确定清除当前存档并重新开始调查吗？'))return;
   localStorage.removeItem(SAVE_KEY);localStorage.removeItem('lost_memory_complete');localStorage.removeItem('lost_memory_ending');location.reload();
 }
+function normalizeAge(root=document.body){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(n=>{n.nodeValue=n.nodeValue.replaceAll('6岁','3岁').replaceAll('六岁','三岁')});
+}
 function initSaveControls(){
   const row=document.querySelector('.panel .row');if(!row)return;
   const save=document.createElement('button');save.textContent='保存进度';save.onclick=saveGame;
   const load=document.createElement('button');load.textContent='读取存档';load.onclick=loadGame;
   const reset=document.createElement('button');reset.textContent='重新开始';reset.onclick=newGame;
   row.append(save,load,reset);
-  if(typeof missingVideo!=='undefined')missingVideo.src='missing-boy.mp4';
+  if(typeof missingVideo!=='undefined')missingVideo.src='missing-boy.MP4';
+  normalizeAge();
+  const ageObserver=new MutationObserver(()=>normalizeAge());
+  ageObserver.observe(document.body,{childList:true,subtree:true});
   if(localStorage.getItem(SAVE_KEY))sela('检测到本地存档。可选择“读取存档”恢复调查。');
 }
 window.addEventListener('DOMContentLoaded',initSaveControls);
