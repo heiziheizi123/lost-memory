@@ -24,6 +24,7 @@ function initSaveControls(){
   const load=document.createElement('button');load.textContent='读取存档';load.onclick=loadGame;
   const reset=document.createElement('button');reset.textContent='重新开始';reset.onclick=newGame;
   row.append(save,load,reset);
+  if(typeof missingVideo!=='undefined')missingVideo.src='missing-boy.mp4';
   if(localStorage.getItem(SAVE_KEY))sela('检测到本地存档。可选择“读取存档”恢复调查。');
 }
 window.addEventListener('DOMContentLoaded',initSaveControls);
