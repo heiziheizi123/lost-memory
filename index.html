@@ -1,209 +1,41 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新城关小学吧-百度贴吧</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; background-color: #dee4ed; color: #333; }
-        
-        /* 顶部蓝色导航条 */
-        .top-blue-bar { background: #2d8cf0; color: #fff; padding: 10px 15px; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .top-blue-bar .search-icon { font-size: 18px; }
-
-        /* 吧Header区域 - 点击头像或名字进入 chengguan.html */
-        .bar-header-link { text-decoration: none; color: inherit; display: block; }
-        .bar-header { background: #fff; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #d1d7e2; }
-        .bar-avatar { width: 55px; height: 55px; background: #4ba3e3; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: bold; text-align: center; line-height: 1.3; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
-        .bar-info { margin-left: 12px; flex: 1; }
-        .bar-name { font-size: 18px; font-weight: bold; color: #000; display: flex; align-items: center; }
-        .bar-name::after { content: "＋关注"; font-size: 11px; background: #ff4d4f; color: #fff; padding: 2px 6px; border-radius: 3px; margin-left: 8px; font-weight: normal; }
-        .bar-stats { font-size: 11px; color: #777; margin-top: 4px; }
-
-        /* 导航栏 */
-        .nav-tabs { display: flex; background: #fff; border-bottom: 1px solid #d1d7e2; font-size: 14px; }
-        .tab-item { flex: 1; text-align: center; padding: 12px 0; color: #666; position: relative; }
-        .tab-item.active { color: #2d8cf0; font-weight: bold; }
-        .tab-item.active::after { content: ""; position: absolute; bottom: 0; left: 35%; width: 30%; height: 3px; background: #2d8cf0; border-radius: 2px; }
-
-        /* 复古横幅广告位 1 (宠物之家) */
-        .ad-banner-1 { background: #fff; padding: 8px 10px; margin-top: 5px; border-bottom: 1px solid #d1d7e2; }
-        .ad-banner-1 img { width: 100%; border-radius: 4px; display: block; }
-
-        /* 帖子标题区 */
-        .main-post-title { background: #fff; padding: 15px 15px 10px 15px; margin-top: 8px; font-size: 18px; font-weight: bold; color: #000; border-bottom: 1px solid #f0f0f0; line-height: 1.4; }
-
-        /* 楼层基本样式 */
-        .floor { background: #fff; padding: 15px; border-bottom: 1px solid #ecf0f5; }
-        .floor-header { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
-        .avatar-placeholder { width: 32px; height: 32px; background: #ccc; border-radius: 50%; margin-right: 10px; }
-        .user-info { flex: 1; }
-        .username { font-weight: bold; color: #444; }
-        .lz-badge { background: #2d8cf0; color: #fff; font-size: 9px; padding: 1px 3px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
-        .floor-num { color: #999; }
-        .floor-content { font-size: 15px; color: #111; word-break: break-all; margin-top: 4px; line-height: 1.6; }
-        
-        /* 游戏线索图片占位 */
-        .evidence-img-box { width: 100%; max-width: 240px; height: 150px; background: #e6ebf2; border: 1px dashed #a0b2cb; margin-top: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #555; font-style: italic; border-radius: 4px; }
-
-        /* 楼中楼回复样式 */
-        .sub-comments { background: #f4f6f9; padding: 8px 12px; border-radius: 4px; margin-top: 12px; font-size: 13px; border: 1px solid #e9edf3; }
-        .sub-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #d1d7e2; line-height: 1.4; }
-        .sub-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-        .sub-username { color: #2d8cf0; font-weight: bold; }
-
-        /* 复古方块广告位 2 (聊天推广) */
-        .ad-box-2 { background: #fff; margin: 8px 0; padding: 12px; display: flex; align-items: center; border-top: 1px solid #d1d7e2; border-bottom: 1px solid #d1d7e2; background-color: #fcfdfe; }
-        .ad-box-2 .ad-img { width: 50px; height: 50px; background: #2d8cf0; border-radius: 8px; margin-right: 12px; }
-        .ad-box-2 .ad-text { flex: 1; }
-        .ad-box-2 .ad-title { font-size: 14px; font-weight: bold; color: #333; }
-        .ad-box-2 .ad-desc { font-size: 12px; color: #888; margin-top: 2px; }
-        .ad-box-2 .ad-btn { font-size: 12px; border: 1px solid #2d8cf0; color: #2d8cf0; padding: 4px 8px; border-radius: 4px; }
-    </style>
-</head>
-<body>
-
-    <div class="top-blue-bar">
-        <span>百度贴吧</span>
-        <span class="search-icon">🔍</span>
-    </div>
-
-    <a href="chengguan.html" class="bar-header-link">
-        <div class="bar-header">
-            <div class="bar-avatar">新城关<br>小学吧</div>
-            <div class="bar-info">
-                <div class="bar-name">新城关小学吧</div>
-                <div class="bar-stats">关注：12,405 &nbsp; 帖子：84,132</div>
-            </div>
-        </div>
-    </a>
-
-    <div class="nav-tabs">
-        <div class="tab-item active">看帖</div>
-        <div class="tab-item">图片</div>
-        <div class="tab-item">精品</div>
-    </div>
-
-    <div class="ad-banner-1">
-        <div style="background: #fdf5ec; border: 1px solid #edd5be; padding: 15px; border-radius: 4px; text-align: center; color: #6b3e16;">
-            <h3 style="font-size: 18px; margin-bottom: 4px;">江州市宠物之家</h3>
-            <p style="font-size: 12px; color: #9e7651;">宠物寄养 · 美容 · 医疗</p>
-            <p style="font-size: 10px; color: #ccc; text-align: right; margin-top: 5px;">地址：江州市阳光路32号附1号</p>
-        </div>
-    </div>
-
-    <div class="main-post-title">
-        【13】有人认识这个被墨水挡住的女孩吗
-    </div>
-
-    <div class="floor">
-        <div class="floor-header">
-            <div class="avatar-placeholder" style="background: #ff9900;"></div>
-            <div class="user-info">
-                <div class="username">重演./<span class="lz-badge">楼主</span></div>
-            </div>
-            <div class="floor-num">1楼</div>
-        </div>
-        <div class="floor-content">
-            吧里有20届的同学吗，有人认识这个女生吗，问了身边几个同学大家都说忘记她是谁了。。。说来也怪，明明其他人我们大家都记得，唯独对她没印象，也没有一个人有她的联系方式。
-            <div class="evidence-img-box">
-                [picture1.jpg 毕业照局部]
-            </div>
-        </div>
-    </div>
-
-    <div class="floor">
-        <div class="floor-header">
-            <div class="avatar-placeholder" style="background: #5cadff;"></div>
-            <div class="user-info">
-                <div class="username">用户djfjfjesfv</div>
-            </div>
-            <div class="floor-num">2楼</div>
-        </div>
-        <div class="floor-content">
-            同学，这种情况少打扰人家了，都不记得她谈何寻人。
-            
-            <div class="sub-comments">
-                <div class="sub-item">
-                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>就是太好奇了嘛</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="floor">
-        <div class="floor-header">
-            <div class="avatar-placeholder" style="background:#19be6b;"></div>
-            <div class="user-info">
-                <div class="username">雾里藏月</div>
-            </div>
-            <div class="floor-num">3楼</div>
-        </div>
-        <div class="floor-content">
-            我是你隔壁班的，你们班真的有这个人吗？
-            
-            <div class="sub-comments">
-                <div class="sub-item">
-                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>毕业照都在这里了，你这么一说是很吓人。。。</span>
-                </div>
-                <div class="sub-item">
-                    <span class="sub-username">雾里藏月</span>：回复<span>会不会是哪个休学的同学被p上毕业照了？</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="ad-box-2">
-        <div class="ad-img" style="display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; font-weight:bold;">💬</div>
-        <div class="ad-text">
-            <div class="ad-title">同城扩列聊天软件</div>
-            <div class="ad-desc">来新城关小学吧，和志同道合的人一起畅聊</div>
-        </div>
-        <div class="ad-btn">下载</div>
-    </div>
-
-    <div class="floor">
-        <div class="floor-header">
-            <div class="avatar-placeholder" style="background:#ccc;"></div>
-            <div class="user-info">
-                <div class="username" style="color: #999; text-decoration: line-through;">用户已注销</div>
-            </div>
-            <div class="floor-num">4楼</div>
-        </div>
-        <div class="floor-content" style="color: #ba1c1c; font-weight: 500; font-family: Georgia, serif;">
-            众里寻他千百度。百十楼中月自明。
-            
-            <div class="sub-comments">
-                <div class="sub-item">
-                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>什么鬼？你没学过语文吗，寻人贴你捣什么乱😂</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="floor">
-        <div class="floor-header">
-            <div class="avatar-placeholder" style="background:#9a66e4;"></div>
-            <div class="user-info">
-                <div class="username">看星星的人</div>
-            </div>
-            <div class="floor-num">5楼</div>
-        </div>
-        <div class="floor-content">
-            lz我是你同学，我好像有点印象。
-            
-            <div class="sub-comments">
-                <div class="sub-item">
-                    <span class="sub-username">重演./</span><span class="lz-badge" style="zoom:0.8;">楼主</span>：回复<span>你是哪位来着？</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="text-align: center; padding: 20px; font-size: 11px; color: #8f9bb3;">
-        ©2026 Baidu 贴吧客户端复古精简版
-    </div>
-
-</body>
-</html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LOST MEMORY｜周扬名失踪案</title><style>
+*{box-sizing:border-box}body{margin:0;background:#090b0d;color:#d9dde1;font:14px/1.65 Consolas,"Microsoft YaHei",sans-serif}.wrap{max-width:1200px;margin:auto;padding:18px;display:grid;grid-template-columns:1fr 330px;gap:16px}header{grid-column:1/-1;border-bottom:1px solid #30363d;padding:8px 0 15px}h1{margin:0;color:#d5ad5b;letter-spacing:3px}.sub{color:#7d8790}.box{background:#101418;border:1px solid #2b3137;border-radius:5px;padding:14px;margin-bottom:14px}#out{height:480px;overflow:auto}.sela{color:#59d3aa}.sys{color:#e8a66a}.new{color:#71aee8}.warn{color:#e27676}.rec{border-left:3px solid #3f596d;background:#151b20;padding:10px;margin:9px 0}.time{font-size:12px;color:#79838c}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}input,select,button{background:#181d22;color:#ddd;border:1px solid #3b434b;padding:9px;border-radius:3px}input{flex:1;min-width:160px}button{cursor:pointer}button:hover{border-color:#d5ad5b}.tag{display:inline-block;border:1px solid #3d566b;color:#8ec5ef;padding:4px 7px;margin:3px;border-radius:3px}.person{border-color:#5b4d2e;color:#e2c477}.locked{color:#555}.small{font-size:12px;color:#838b92}#restore{display:none}.question{padding:10px 0;border-bottom:1px solid #292f35}.question select{width:100%;margin-top:5px}@media(max-width:850px){.wrap{grid-template-columns:1fr}#out{height:430px}}
+</style></head><body><div class="wrap"><header><h1>LOST MEMORY</h1><div class="sub">CASE 00：车祸现场男童失踪案｜SELA Investigation System</div></header><main><div class="box" id="out"></div><div class="box"><b>资料检索</b><div class="small">输入 typehelp 查看规则。检索格式：人物编号/地点编号</div><div class="controls"><input id="cmd" placeholder="例：A/R"><button onclick="run()">检索</button><button onclick="hint()">请求SELA提示</button><button onclick="toggleRestore()">证词还原</button></div></div><div class="box" id="restore"><b>证词还原 / 去向分析</b><div id="restoreBody"></div></div><div class="box"><b>词条库</b><div id="terms"></div></div></main><aside><div class="box"><b>人物档案</b><div id="people"></div></div><div class="box"><b>已开放地点</b><div id="places"></div></div><div class="box"><b>案件概要</b><p>委托方：周夫妇</p><p>失踪者：周扬名，男，6岁</p><p>事件：雨夜车辆单方撞击护栏。父母重伤获救，后排男童在现场失踪。</p><p class="small">警方早期曾同时考虑自行离开、被路人暂时带离及事故现场搜索遗漏。</p></div><div class="box"><b>寻人启事录像</b><p class="small">将你制作的视频放到仓库 <code>assets/missing-boy.mp4</code> 后即可播放。</p><video controls style="width:100%" src="assets/missing-boy.mp4"></video></div></aside></div><script>
+const P={A:'周明远｜父亲、委托人',B:'侦探｜玩家',C:'陈国安｜负责警官',D:'林淑琴｜身份待核',E:'赵志强｜货车司机',F:'孙丽华｜急救护士',G:'吴建民｜小卖部老板',H:'郑凯｜出租车司机',I:'罗春梅｜附近居民',J:'周扬名｜失踪男童'};
+const L={R:'Road｜青禾路事故现场',A:'Apartment｜周家',H:'Hospital｜市第二医院',S:'Store｜建民小卖部',B:'Bridge｜东渠桥',T:'Taxi Stand｜旧客运站出租车点',P:'Police｜城南派出所',G:'Gas Station｜南环加油站'};
+let st={p:new Set(['A','B','C']),l:new Set(['R','A']),t:new Set(),seen:new Set(),rest:new Set()};
+const records={
+'A/A':()=>rec('周明远补充陈述','“扬名那天一直坐后排右边。出门前他还因为没带那只蓝色小汽车闹脾气。我们不是没找……醒过来的时候警察告诉我车里没有孩子。”','家属确认','后排右座'),
+'A/R':()=>{unlockP('F');unlockL('H');term('儿童哭声');return rec('周明远事故记忆','“撞上去以后我有一小会儿是醒着的。我听见扬名哭，喊过一声爸爸。再往后就不知道了。后来有人跟我说，是一个姓孙的护士先处理我们。”','儿童哭声')},
+'C/R':()=>{unlockP('E');term('现场封锁');return rec('陈国安现场补充笔录','21:24接警，21:31到场。救护已先到。外围警戒尚未完成。货车司机赵志强在路肩协助指挥车辆。后排右门处于开启状态。','现场封锁','后排车门')},
+'C/P':()=>rec('警方内部复盘','早期搜寻以事故点周围沟渠、绿化带为中心。因家属昏迷，最初无法确认儿童是否随车。22:06才从医院确认“车内应有一名六岁男童”。','确认延迟'),
+'E/R':()=>{unlockL('B');term('灰色外套');return rec('赵志强第一次证词','“我大概21:17到。救护车还没来。我看见后门边有个穿灰外套的人，像女的。我以为是家属，就没多问。后来我去桥边挪车。”','灰色外套','21:17')},
+'E/B':()=>{unlockP('I');return rec('赵志强补充证词','“桥边那个女的？我没看清脸。罗春梅当时也在那边，她一直说有人抱着孩子走。我觉得她看错了，雨那么大。”','目击争议')},
+'F/H':()=>{term('急救优先');return rec('孙丽华救护记录','21:23抵达。驾驶位男性与副驾驶女性均需优先处置。后排右门已经打开。孙丽华称：“我问过一句孩子是谁抱着，旁边有人说家里人，我就继续处理伤者。”','急救优先','身份误认')},
+'F/R':()=>{unlockL('H');return rec('孙丽华现场回忆','“我没有亲眼看见孩子被谁抱走。但我听到过一次小孩哭声，很短。那时后排旁边至少有两三个路人。”','儿童哭声')},
+'I/B':()=>{unlockP('G');unlockL('S');term('抱离');return rec('罗春梅证词','“我看见一个灰衣女人抱着孩子往桥东走。孩子头靠在她肩上，不像自己走的。她走得很快。小卖部老吴那晚还开着，他应该也看见了。”','抱离','桥东')},
+'G/S':()=>{unlockP('H');unlockL('T');term('红色塑料袋');return rec('吴建民口述','“九点多有个女的进来买毛巾和水，怀里抱着个男孩。她拿的是红塑料袋。后来老郑的出租车停在门口。我没当回事，以为是母子。”','红色塑料袋','出租车')},
+'H/T':()=>{term('未登记乘客');return rec('郑凯与调度旧记录','调度：你不是说那晚没拉人吗？\n郑凯：不是那个。\n调度：哪个？\n郑凯：桥边那个女的。\n调度：林姐？\n郑凯：你别乱说，我没说名字。','林姐','未登记乘客')},
+'H/S':()=>rec('郑凯第二次陈述','“我只记得有人敲车窗，女的抱着孩子，说去南环。她给现金，中途在加油站附近下车。具体几点我真记不住。”','南环'),
+'G/B':()=>{if(st.seen.has('H/T')) unlockD();return rec('吴建民后续聊天','“以前住桥东的林淑琴？她那天回来过？我只记得那个女的侧脸有点像她。林家早搬走了。”','林淑琴')},
+'D/T':()=>{unlockL('G');term('临时停车');return rec('林淑琴相关排查资料','旧客运站调度纸本中发现“林淑琴”姓名缩写。其本人并非登记乘客。郑凯车辆当晚21:40—22:10里程增加约8公里。','临时停车','里程异常')},
+'D/G':()=>{term('换乘可能');return rec('南环加油站旧账旁注','当晚值班员曾记录“一女带一小孩借电话，随后搭上一辆白色面包车”。车牌未记全。无法证明该女性就是林淑琴。','换乘可能')},
+'J/R':()=>rec('周扬名现场身份还原','家属证词、急救人员听到的儿童哭声、后排儿童座椅及现场遗留鞋印能够相互支持：事故发生后，周扬名仍在车辆附近且具有生命反应。','事故后存活')};
+function rec(title,text,...tags){tags.forEach(term);return `<div class="rec"><b>${title}</b><div>${text.replace(/\n/g,'<br>')}</div></div>`}
+function log(x,c=''){out.insertAdjacentHTML('beforeend',`<div class="${c}">${x}</div>`);out.scrollTop=out.scrollHeight}
+function term(x){if(!st.t.has(x)){st.t.add(x);render()}}
+function unlockP(x){if(!st.p.has(x)){st.p.add(x);log(`SELA：聊天/记录中确认新的案件关联人。<br><b>${x} — ${P[x]}</b>`,'new');render()}}
+function unlockL(x){if(!st.l.has(x)){st.l.add(x);log(`SELA：新地点编号已登记：<b>${x} — ${L[x]}</b>`,'new');render()}}
+function unlockD(){if(!st.p.has('D')&&st.seen.has('H/T')&&st.seen.has('G/B')){st.p.add('D');log('SELA：两个独立记录中的“林姐”与“林淑琴”可以建立关联。<br><b>D — 林淑琴</b> 已加入隐藏人物档案。','warn');render()}}
+function run(){let q=cmd.value.trim().toUpperCase();cmd.value='';if(q.toLowerCase()==='TYPEHELP')return help();if(!q.includes('/'))return log('SELA：格式错误。输入 typehelp 查看检索规则。','sela');let[a,l]=q.split('/');if(!st.p.has(a))return log(`SELA：人物 ${a} 尚未登记。人物必须先在已解锁记录中被确认。`,'sela');if(!st.l.has(l))return log(`SELA：地点 ${l} 尚未开放。`,'sela');let k=a+'/'+l;if(!records[k])return log(`SELA：没有找到 ${k} 的有效记录。不要假设每个人物与每个地点都有联系。`,'sela');st.seen.add(k);log(records[k]());if(k==='G/B')unlockD();checkJ();renderRestore()}
+function help(){log(`<div class="rec"><b>TYPEHELP / 调查说明</b><br>1. 输入“人物编号/地点编号”检索。例：A/R。<br>2. 开局只开放 A、B、C 与 R、A。<br>3. <b>只有阅读到明确提及的新人物后，人物编号才会解锁。</b><br>4. 地点使用英文名称首字母。新地点同样需要调查发现。<br>5. 部分记录需要多个人物证词结合后才能完成还原。<br>6. D为隐藏人物，不影响基础调查启动。<br>7. 最终目标不是指出凶手，而是提交周扬名事故后的最合理去向。</div>`)}
+function checkJ(){if(st.seen.has('A/A')&&st.seen.has('A/R')&&st.seen.has('F/R')&&!st.p.has('J')){unlockP('J');log('SELA：家属描述、车辆座位信息与现场儿童声音已形成身份链。J可作为独立调查对象。','sela')}}
+function hint(){let order=['A/A','A/R','C/R','F/R','E/R','E/B','I/B','G/S','H/T','G/B','H/S','D/T','D/G','J/R'];let n=order.find(k=>!st.seen.has(k)&&st.p.has(k[0])&&st.l.has(k[2]));log(n?`SELA：建议核对尚未查看的关联：<b>${n}</b>。这只是调查方向，不代表该人物有嫌疑。`:'SELA：当前可直接检索的主要记录已基本查看。尝试进行证词还原。','sela')}
+const qs=[['r1','周扬名事故发生后是否仍然存活？',['请选择','是，存在生命反应','否，当场死亡','无法证明'],'是，存在生命反应'],['r2','男童最可能如何离开事故核心现场？',['请选择','自行步行','被成年人抱离','随救护车离开'],'被成年人抱离'],['r3','现场为何没有立即阻止带离行为？',['请选择','警方故意放行','救援初期身份误认且封锁未完成','父母同意'],'救援初期身份误认且封锁未完成'],['r4','G、H、I三人的证词共同指向什么路线？',['请选择','事故点→桥东→小卖部→出租车→南环','事故点→医院→警署','事故点→周家'],'事故点→桥东→小卖部→出租车→南环'],['r5','若D线成立，南环之后最合理的判断？',['请选择','确定死亡','可能换乘其他车辆，后续去向无法确认','自行返回事故现场'],'可能换乘其他车辆，后续去向无法确认']];
+function toggleRestore(){restore.style.display=restore.style.display==='none'?'block':'none';renderRestore()}
+function renderRestore(){let ready=st.seen.size>=8;restoreBody.innerHTML=(ready?'':'<p class="warn">SELA：证据量不足。建议继续调查。</p>')+qs.map(q=>`<div class="question">${q[1]}<select id="${q[0]}">${q[2].map(x=>`<option>${x}</option>`).join('')}</select></div>`).join('')+`<div class="controls"><button onclick="submitRestore()">提交周扬名去向分析</button></div>`}
+function submitRestore(){if(st.seen.size<8)return log('SELA：拒绝提交。当前证词链不足以支持去向结论。','warn');let base=qs.slice(0,4).every(q=>document.getElementById(q[0]).value===q[3]);if(!base)return log('SELA：去向模型与已掌握证词存在冲突。请重新检查多人证词。','warn');let hidden=document.getElementById('r5').value===qs[4][3]&&st.p.has('D')&&st.seen.has('D/G');if(hidden){log('<b>案件分析完成｜隐藏调查成立</b><br>周扬名在事故后仍存活，被一名成年人利用救援初期身份确认空窗抱离，经桥东、小卖部和出租车前往南环，并可能再次换乘。此后去向无法由现有资料确认。<br><br><span class="warn">附注：多年后的一份非案件网络资料中，出现了与本案儿童资料相似的旧物记录。来源未核实。案件仍不得标记为已找到。</span>','sys')}else{log('<b>案件分析完成</b><br>周扬名事故后仍有生命反应，并非自行走失。现有证据最支持其被成年人抱离现场，随后经桥东方向离开警方最初搜索范围。后续去向无法确认。<br><br>案件状态：长期失踪。','sys')}}
+function render(){people.innerHTML=[...st.p].sort().map(x=>`<span class="tag person">${x} ${P[x]}</span>`).join('');places.innerHTML=[...st.l].map(x=>`<span class="tag">${x} ${L[x]}</span>`).join('');terms.innerHTML=[...st.t].map(x=>`<span class="tag">${x}</span>`).join('')||'<span class="locked">尚未取得词条</span>'}
+cmd.addEventListener('keydown',e=>{if(e.key==='Enter')run()});render();renderRestore();log('<span class="sela">SELA：</span> 调查终端已连接。周夫妇要求重新调查其子周扬名在交通事故现场失踪一案。');log('初始人物：<b>A 周明远 / B 侦探 / C 陈国安</b><br>限定调查地点：<b>R — Road</b>、<b>A — Apartment</b><br>输入 <b>typehelp</b> 查看调查方式。','sys');
+</script></body></html>
