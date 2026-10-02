@@ -8,7 +8,7 @@ function loadGame(){
   let raw=localStorage.getItem(SAVE_KEY);if(!raw)return sela('未检测到可读取存档。');
   try{
     let d=JSON.parse(raw);if(!d||d.version!==1)throw new Error('version');
-    st.p=new Set(d.p||[]);st.l=new Set(d.l||[]);st.t=new Set(d.t||[]);st.seen=new Set(d.seen||[]);st.items=new Set(d.items||[]);st.sel=d.sel||[];st.rest=new Set(d.rest||[]);st.comb=new Set(d.comb||[]);
+    st.p=new Set(d.p||[]);st.l=new Set(d.l||[]);const termMap={'现场封锁':'外围未封闭','急救优先':'伤员优先转运','身份确认空窗':'接走者身份未核实','未登记乘客':'现金短途单未登记','南环':'出租车前往南环','同一女性可能':'离店与上车时间衔接','搜索方向偏差':'首轮仅搜事故点周边','南环路线吻合':'里程与南环相符','脱离搜索圈':'搜寻开始前已离开范围','换乘可能':'白色面包车','二次转移':'再次上车'};st.t=new Set((d.t||[]).map(x=>termMap[x]||x));st.seen=new Set(d.seen||[]);st.items=new Set(d.items||[]);st.sel=d.sel||[];st.rest=new Set(d.rest||[]);st.comb=new Set(d.comb||[]);
     O.innerHTML=(d.output||'').replaceAll('6岁','3岁').replaceAll('六岁','三岁');
     videoPanel.style.display=st.t.has('公开寻人时间')?'block':'none';
     render();renderRestore();sela('存档读取完成。调查状态已恢复。');
