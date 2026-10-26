@@ -1,0 +1,6 @@
+{
+  "name": "lost-memory",
+  "private": true,
+  "scripts": { "test": "node tests/run.cjs" },
+  "devDependencies": { "playwright": "1.62.1" }
+}
