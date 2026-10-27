@@ -37,7 +37,26 @@
   assistant.insertBefore(cutout,$('assistantMessage'));
   const face=document.createElement('div');face.className='sela-expression-tile';assistant.append(face);
   const antenna=document.createElementNS('http://www.w3.org/2000/svg','path');antenna.setAttribute('d','M137 66L125 26M170 61L194 32');antenna.setAttribute('fill','none');antenna.setAttribute('stroke','#b5a176');antenna.setAttribute('stroke-width','3');cutout.querySelector('svg').append(antenna);
-  function refreshFace(){const state=assistant.dataset.state||'smile';face.innerHTML=sprite(state,crops[state]||crops.smile);face.dataset.expression=state;}
+  const expressionPaths={
+    smile:['M119 104v14 M181 104v14','M140 129l10 8 10-8'],
+    thinking:['M114 111h18 M170 111h18','M142 134h16'],
+    discovery:['M122 111a6 6 0 1 0 .1 0 M178 111a6 6 0 1 0 .1 0','M145 132a5 6 0 1 0 .1 0'],
+    question:['M115 105h17 M174 116h16','M140 135q10-9 20 0'],
+    warning:['M114 102l20 10 M186 102l-20 10','M139 134h22'],
+    success:['M114 115q10-15 20 0 M166 115q10-15 20 0','M137 130q13 19 26 0'],
+    mismatch:['M114 108h19 M177 105v15','M136 135q7-8 14 0t14 0'],
+    waiting:['M114 114h19 M167 114h19','M142 134h16'],
+    reading:['M112 106h25 M163 106h25 M112 115h25 M163 115h25','M142 134h16'],
+    complete:['M114 114q10-12 20 0 M166 114q10-12 20 0','M138 130q12 12 24 0']
+  };
+  const mainFace=document.createElementNS('http://www.w3.org/2000/svg','g');mainFace.classList.add('reference-live-face');
+  mainFace.innerHTML='<path d="M100 83L192 95 184 147 93 135Z" fill="#27291f"/><g class="live-face-lines" transform="matrix(.6 .08 -.08 .6 61 32)" fill="none" stroke="#e0d9b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="live-eyes"/><path class="live-mouth"/></g>';
+  cutout.querySelector('svg').append(mainFace);
+  function refreshFace(){
+    const state=assistant.dataset.state||'smile',paths=expressionPaths[state]||expressionPaths.smile;
+    face.innerHTML=sprite(state,crops[state]||crops.smile);face.dataset.expression=state;
+    mainFace.dataset.expression=state;mainFace.querySelector('.live-eyes').setAttribute('d',paths[0]);mainFace.querySelector('.live-mouth').setAttribute('d',paths[1]);
+  }
   new MutationObserver(refreshFace).observe(assistant,{attributes:true,attributeFilter:['data-state']});refreshFace();
   const message=$('assistantMessage');message.classList.add('assistant-note');
   const signature=document.createElement('span');signature.className='note-signature';signature.textContent='— SELA';message.append(signature);
@@ -80,9 +99,12 @@
   document.querySelectorAll('#restore,.archive-heading,.search-paper,#box,#settingsPanel,.evidence-panel').forEach(addPaperTexture);
   function syncView(){
     const view=document.body.dataset.view||'archive';
-    tabs.querySelectorAll('button').forEach(b=>{const active=b.dataset.folder===view||(view==='evidence'&&b.dataset.folder==='people'&&document.body.classList.contains('people-focus'));b.setAttribute('aria-current',active?'page':'false');});
+    const activeFolder=view==='evidence'&&document.body.classList.contains('people-focus')?'people':view;
+    tabs.querySelectorAll('button').forEach(b=>{if(b.dataset.folder===activeFolder)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
     if(view==='reasoning')$('restore').style.display='block';
   }
-  tabs.addEventListener('click',e=>{const b=e.target.closest('[data-folder]');if(!b)return;const view=b.dataset.folder;document.body.classList.toggle('people-focus',view==='people');document.querySelector(`.keycap-nav [data-view="${view==='people'?'evidence':view}"]`).click();if(view==='people')$('people').closest('.panel').scrollIntoView({block:'start'});syncView();});
+  let selectingPeople=false;
+  document.querySelector('.keycap-nav [data-view="evidence"]').addEventListener('click',()=>{if(!selectingPeople)document.body.classList.remove('people-focus');syncView();});
+  tabs.addEventListener('click',e=>{const b=e.target.closest('[data-folder]');if(!b)return;const view=b.dataset.folder;document.body.classList.toggle('people-focus',view==='people');selectingPeople=view==='people';document.querySelector(`.keycap-nav [data-view="${view==='people'?'evidence':view}"]`).click();selectingPeople=false;if(view==='people')$('people').closest('.panel').scrollIntoView({block:'start'});syncView();});
   new MutationObserver(syncView).observe(document.body,{attributes:true,attributeFilter:['data-view']});syncView();
 })();

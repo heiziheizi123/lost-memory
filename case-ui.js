@@ -194,6 +194,8 @@
     if(d.card.hasPointerCapture(d.id))d.card.releasePointerCapture(d.id);
   }
   for(const event of ['blur','resize','orientationchange','pagehide'])window.addEventListener(event,cancelDrag);
+  // iOS may resize only the visual viewport when its software keyboard opens.
+  window.visualViewport?.addEventListener('resize',cancelDrag);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelDrag();});
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(entries.some(e=>!e.isIntersecting))cancelDrag();}).observe($('reasoningDeck'));
   function showView(view,focus=true) {
