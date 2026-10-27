@@ -18,6 +18,8 @@ Tested on 2026-10-27 with Playwright 1.62.1 and installed Microsoft Edge (Chromi
 
 The main investigation script, save-system.js, ending.html and thanks.html are preserved. No story, answer or unlock-condition changes are intended.
 
+The suites were also rerun after the user-reference implementation (Canva element decomposition, local reference atlas, fanned cards, folder tabs, separate views and reference SELA illustration). The card drag transform includes its layout baseline, preserving centered placement on mobile. `docs/REFERENCE_HANDOFF.md` lists Canva's paid-feature limitation and the deferred approval/export steps.
+
 ## Reproduce
 
 Install Node.js, then run `npm install`, `npx playwright install chromium`, and `npm test`. If using installed Edge, set `TEST_BROWSER_CHANNEL=msedge` instead of downloading Chromium. The runner serves the repository on 127.0.0.1:8123 and shuts down afterwards. Screenshots are written to ignored `tests/artifacts/`.

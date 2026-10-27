@@ -10,4 +10,4 @@ Base commit: a5cc6ed79da2a5cbc39367a106d52ff886dd70f9.
 - UI preferences use a separate key, lost_memory_ui_v1. Timeline derives only from completed deductions; no new story facts.
 - Wrong answers retain selections and identify the sentence slot to review, referencing the existing clue rather than adding facts.
 
-Implementation uses native HTML/CSS/JS and a locally defined SVG assistant; no runtime framework or external font dependency.
+Implementation uses native HTML/CSS/JS and a locally defined SVG assistant; no runtime framework or external font dependency. The follow-up reference-scene presentation uses a local user-supplied image atlas and browser SVG viewports/masks for the reference illustration, with Canva's element map recorded in assets/canva-elements.json.

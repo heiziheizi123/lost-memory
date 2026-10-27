@@ -159,7 +159,7 @@
   function startDrag(e) {
     if(e.button!==0||!e.isPrimary)return;
     const card=e.target.closest('.front');if(!card)return;
-    drag={id:e.pointerId,card,stage:e.currentTarget,x:e.clientX,y:e.clientY,lastX:e.clientX,lastTime:e.timeStamp,dx:0,v:0,locked:false};
+    drag={id:e.pointerId,card,stage:e.currentTarget,x:e.clientX,y:e.clientY,lastX:e.clientX,lastTime:e.timeStamp,dx:0,v:0,locked:false,baseTransform:getComputedStyle(card).transform};
   }
   function moveDrag(e) {
     if(!drag||e.pointerId!==drag.id)return;
@@ -173,7 +173,7 @@
     }
     const dt=e.timeStamp-drag.lastTime;if(dt>0)drag.v=(e.clientX-drag.lastX)/dt;
     drag.lastX=e.clientX;drag.lastTime=e.timeStamp;drag.dx=dx;
-    if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(drag)drag.card.style.transform=`translateX(${drag.dx}px) rotate(${drag.dx/28}deg)`;});
+    if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(drag)drag.card.style.transform=`translateX(${drag.dx}px) ${drag.baseTransform==='none'?'':drag.baseTransform} rotate(${drag.dx/28}deg)`;});
   }
   function endDrag(e) {
     if(!drag||e.pointerId!==drag.id)return;
