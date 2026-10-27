@@ -39,8 +39,8 @@
   }));
   function apply(target,kind){if(target.querySelector(':scope>.material-surface'))return;target.classList.add('asset-backed');target.prepend(material(kind,'',target.offsetWidth,target.offsetHeight));resize.observe(target);}
   // These surfaces keep the source paper grain and worn edges; all game text stays live.
-  document.querySelectorAll('#restore,#box,#settingsPanel,.archive-heading,.search-paper,.evidence-panel').forEach(el=>apply(el,'paper'));
-  document.querySelectorAll('.keycap-nav button').forEach(button=>{button.classList.add('asset-backed','asset-keycap');button.prepend(material('key','key-normal',button.offsetWidth,button.offsetHeight),material('activeKey','key-current',button.offsetWidth,button.offsetHeight),material('pressedKey','key-pressed',button.offsetWidth,button.offsetHeight));resize.observe(button);});
+  document.querySelectorAll('#restore,#box,#settingsPanel,.archive-heading,.search-paper,.evidence-panel,.opening-folder,.welcome>.panel').forEach(el=>apply(el,'paper'));
+  document.querySelectorAll('.keycap-nav button,.opening-tools button,.welcome .row button').forEach(button=>{button.classList.add('asset-backed','asset-keycap');button.prepend(material('key','key-normal',button.offsetWidth,button.offsetHeight),material('activeKey','key-current',button.offsetWidth,button.offsetHeight),material('pressedKey','key-pressed',button.offsetWidth,button.offsetHeight));resize.observe(button);});
   function dressDeck(){
     document.querySelectorAll('.deck-card').forEach(card=>{
       apply(card,'card');

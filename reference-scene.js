@@ -64,6 +64,11 @@
     mainFace.querySelector('.source-screen-status').textContent=({mismatch:'≠',waiting:'…',reading:'⋯',success:'✓',complete:'✓'})[state]||'';
   }
   new MutationObserver(refreshFace).observe(assistant,{attributes:true,attributeFilter:['data-state']});refreshFace();
+  const openingDesk=desk.cloneNode(true);openingDesk.className='opening-desk';openingDesk.innerHTML=openingDesk.innerHTML.replaceAll('deskObjects','openingDeskObjects').replaceAll('deskShade','openingDeskShade');$('opening').prepend(openingDesk);
+  const openingPortrait=document.querySelector('.opening-portrait');
+  const openingFigure=cutout.cloneNode(true);openingFigure.className='opening-source-figure';
+  openingFigure.innerHTML=openingFigure.innerHTML.replaceAll('selaReferenceClip','openingReferenceClip').replaceAll('sourceScreenClip','openingScreenClip');
+  openingPortrait.append(openingFigure);
   const message=$('assistantMessage');message.classList.add('assistant-note');
   const signature=document.createElement('span');signature.className='note-signature';signature.textContent='— SELA';message.append(signature);
   const intro=document.createElement('div');intro.className='reasoning-intro';intro.innerHTML='<span>CODE SELA<br>CASE RECONSTRUCTION</span><p>结合已有证据，依次梳理推理链条，还原事件的可能经过。</p>';
