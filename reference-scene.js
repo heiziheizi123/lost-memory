@@ -11,9 +11,11 @@
     question:[1189,811,100,105],warning:[1308,811,100,105],success:[1447,811,100,105],
     mismatch:[1308,811,100,105],waiting:[1189,677,100,106],reading:[1308,677,100,106],complete:[1447,811,100,105]
   };
-  function sprite(name,rect,extra='') {
+  let spriteNumber=0;
+  function sprite(name,rect,extra='',fit='xMidYMid slice') {
     const [x,y,w,h]=rect;
-    return `<svg class="atlas-sprite ${extra}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><image href="${atlas}" x="${-x}" y="${-y}" width="1586" height="992"/></svg>`;
+    const id='sourceSprite'+(++spriteNumber);
+    return `<svg class="atlas-sprite ${extra}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="${fit}" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect width="${w}" height="${h}"/></clipPath></defs><g clip-path="url(#${id})"><image href="${atlas}" x="${-x}" y="${-y}" width="1586" height="992"/></g></svg>`;
   }
   document.body.classList.add('reference-scene');
   toggle=function(id){if(id==='restore')document.querySelector('.keycap-nav [data-view="reasoning"]').click();else if(id==='box')document.querySelector('.keycap-nav [data-view="evidence"]').click();};
@@ -37,29 +39,29 @@
   $('selaPortrait').classList.add('original-line-portrait');
   const cutout=document.createElement('div');cutout.className='sela-reference-figure';cutout.setAttribute('aria-hidden','true');
   // Polygon clipping is a browser presentation mask; the supplied bitmap is not altered.
-  cutout.innerHTML=`<svg viewBox="0 0 239 382" focusable="false"><defs><clipPath id="selaReferenceClip"><path d="M91 58L187 54 224 78 235 133 215 169 194 178 208 211 231 259 237 326 205 378 86 378 78 332 63 284 53 223 30 201 12 178 2 154 9 132 20 127 28 141 45 155 64 163 83 151 88 122 80 104Z"/></clipPath></defs><image href="${atlas}" x="-892" y="-286" width="1586" height="992" clip-path="url(#selaReferenceClip)"/></svg>`;
+  cutout.innerHTML=`<svg viewBox="0 0 239 382" focusable="false"><defs><clipPath id="selaReferenceClip"><path d="M91 58L187 54 224 78 235 133 215 169 194 178 208 211 231 259 231 326 217 347 89 355 78 332 63 284 53 223 30 201 12 178 2 154 9 132 20 127 28 141 45 155 64 163 83 151 88 122 80 104Z"/></clipPath></defs><image href="${atlas}" x="-892" y="-286" width="1586" height="992" clip-path="url(#selaReferenceClip)"/></svg>`;
   assistant.insertBefore(cutout,$('assistantMessage'));
   const face=document.createElement('div');face.className='sela-expression-tile';assistant.append(face);
   const antenna=document.createElementNS('http://www.w3.org/2000/svg','path');antenna.setAttribute('d','M137 66L125 26M170 61L194 32');antenna.setAttribute('fill','none');antenna.setAttribute('stroke','#b5a176');antenna.setAttribute('stroke-width','3');cutout.querySelector('svg').append(antenna);
-  const expressionPaths={
-    smile:['M119 104v14 M181 104v14','M140 129l10 8 10-8'],
-    thinking:['M114 111h18 M170 111h18','M142 134h16'],
-    discovery:['M122 111a6 6 0 1 0 .1 0 M178 111a6 6 0 1 0 .1 0','M145 132a5 6 0 1 0 .1 0'],
-    question:['M115 105h17 M174 116h16','M140 135q10-9 20 0'],
-    warning:['M114 102l20 10 M186 102l-20 10','M139 134h22'],
-    success:['M114 115q10-15 20 0 M166 115q10-15 20 0','M137 130q13 19 26 0'],
-    mismatch:['M114 108h19 M177 105v15','M136 135q7-8 14 0t14 0'],
-    waiting:['M114 114h19 M167 114h19','M142 134h16'],
-    reading:['M112 106h25 M163 106h25 M112 115h25 M163 115h25','M142 134h16'],
-    complete:['M114 114q10-12 20 0 M166 114q10-12 20 0','M138 130q12 12 24 0']
+  const sourceScreens={
+    smile:[[1215,710],[1264,706],[1217,749]],thinking:[[1342,711],[1392,707],[1347,748]],
+    discovery:[[1480,709],[1529,706],[1482,749]],question:[[1210,860],[1258,846],[1219,894]],
+    warning:[[1341,852],[1394,851],[1341,891]],success:[[1471,851],[1522,843],[1477,894]]
   };
+  function screenMatrix([p0,p1,p2]){
+    const x1=p1[0]-p0[0],y1=p1[1]-p0[1],x2=p2[0]-p0[0],y2=p2[1]-p0[1],det=x1*y2-x2*y1;
+    const a=(92*y2+7*y1)/det,c=(-92*x2-7*x1)/det,b=(12*y2-52*y1)/det,d=(-12*x2+52*x1)/det;
+    return `matrix(${a} ${b} ${c} ${d} ${100-a*p0[0]-c*p0[1]} ${83-b*p0[0]-d*p0[1]})`;
+  }
   const mainFace=document.createElementNS('http://www.w3.org/2000/svg','g');mainFace.classList.add('reference-live-face');
-  mainFace.innerHTML='<path d="M100 83L192 95 184 147 93 135Z" fill="#27291f"/><g class="live-face-lines" transform="matrix(.6 .08 -.08 .6 61 32)" fill="none" stroke="#e0d9b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="live-eyes"/><path class="live-mouth"/></g>';
+  mainFace.innerHTML=`<defs><clipPath id="sourceScreenClip"><path d="M103 83L190 94Q194 95 193 99L186 144Q185 148 181 147L96 136Q92 136 93 132L99 87Q99 83 103 83Z"/></clipPath></defs><g clip-path="url(#sourceScreenClip)"><image class="source-screen-image" href="${atlas}" width="1586" height="992"/></g><text class="source-screen-status" x="194" y="161" fill="#b99455" font-size="15" font-family="Georgia"/>`;
   cutout.querySelector('svg').append(mainFace);
   function refreshFace(){
-    const state=assistant.dataset.state||'smile',paths=expressionPaths[state]||expressionPaths.smile;
-    face.innerHTML=sprite(state,crops[state]||crops.smile);face.dataset.expression=state;
-    mainFace.dataset.expression=state;mainFace.querySelector('.live-eyes').setAttribute('d',paths[0]);mainFace.querySelector('.live-mouth').setAttribute('d',paths[1]);
+    const state=assistant.dataset.state||'smile';
+    face.innerHTML=sprite(state,(['success','complete'].includes(state)?crops.smile:crops[state])||crops.smile);face.dataset.expression=state;
+    const sourceState=({mismatch:'warning',waiting:'smile',reading:'thinking',success:'smile',complete:'smile'})[state]||state;
+    mainFace.dataset.expression=state;mainFace.querySelector('.source-screen-image').setAttribute('transform',screenMatrix(sourceScreens[sourceState]||sourceScreens.smile));
+    mainFace.querySelector('.source-screen-status').textContent=({mismatch:'≠',waiting:'…',reading:'⋯',success:'✓',complete:'✓'})[state]||'';
   }
   new MutationObserver(refreshFace).observe(assistant,{attributes:true,attributeFilter:['data-state']});refreshFace();
   const message=$('assistantMessage');message.classList.add('assistant-note');
@@ -92,19 +94,25 @@
   function positionIllustration(){illustration.style.setProperty('--detail-photo-top',($('restoreBody').offsetTop+28)+'px');}
   new ResizeObserver(positionIllustration).observe($('restoreBody'));positionIllustration();
   const facts=['家属口述与现场声音','撞击后的独立口述','车门、鞋印与随身物品','现场处置与身份核验','事故点至桥东的目击','离店时间与出租车行程','侧脸与纸本缩写','搜索范围与车辆里程','南环旧账与再次上车'];
+  const rearPictures=[[180,522,67,112],[245,495,61,106],[314,477,55,105],[451,410,193,156],[380,438,54,120],[675,447,39,111],[742,476,34,101],[805,497,34,99],[859,520,31,102]];
   function decorateDeck(){
     const stage=$('reasoningDeck').querySelector('.deck-stage');if(!stage)return;
+    const currentNumber=Number(stage.querySelector('.front').dataset.id.slice(1));
+    const remaining=[1,2,3,4,5,6,7,8,9].filter(n=>n!==currentNumber);
     stage.querySelectorAll('.deck-card').forEach(card=>{
-      const n=Number(card.dataset.id.slice(1));card.style.setProperty('--slot',n);card.dataset.number=n;
+      const n=Number(card.dataset.id.slice(1)),isFront=card.classList.contains('front'),order=remaining.indexOf(n),slot=isFront?0:order<4?order-4:order-3;
+      card.style.setProperty('--slot',slot+5);card.dataset.number=n;card.dataset.fanSide=slot<0?'left':'right';
+      if(!isFront)card.style.zIndex=20-Math.abs(slot);
       if(!card.classList.contains('front'))card.addEventListener('click',()=>document.querySelector('[data-choose="'+card.dataset.id+'"]').click());
       const title=card.querySelector('strong');const status=card.querySelector('small');
-      card.querySelector('span').textContent='推理 '+n;
+      if(isFront)card.querySelector('span').textContent='推理 '+n;
+      else card.querySelector('span').innerHTML='<i class="reasoning-label">推理</i><b class="reasoning-number">'+n+'</b>';
       const photo=document.createElement('div');photo.className='reasoning-photo';
-      photo.innerHTML=sprite('illustration',n%3===0?[455,450,180,115]:n%3===1?[452,410,192,155]:[234,500,96,110]);
+      photo.innerHTML=sprite('illustration',isFront?[451,410,193,156]:rearPictures[n-1],'',isFront?'xMidYMid slice':slot<0?'xMinYMid meet':'xMaxYMid meet');
       card.insertBefore(photo,title);
       const note=document.createElement('p');note.className='card-excerpt';note.textContent=facts[n-1];card.insertBefore(note,status);
       const clip=document.createElement('i');clip.className='paperclip';clip.setAttribute('aria-hidden','true');card.append(clip);
-      card.style.setProperty('--fan-x',(n-5)*76+'px');card.style.setProperty('--fan-r',(n-5)*4+'deg');card.style.setProperty('--fan-y',Math.abs(n-5)*13+'px');
+      card.style.setProperty('--fan-x',slot*76+'px');card.style.setProperty('--fan-r',slot*4+'deg');card.style.setProperty('--fan-y',Math.abs(slot)*13+'px');
     });
     const p=$('reasoningDeck').querySelector('.deck-shell>.small');p.textContent='把已知的线索串联起来，看看事情的真相是什么。';
     const caption=document.createElement('p');caption.className='drag-caption';caption.innerHTML='<span aria-hidden="true">⟵</span> 拖拽选择推理卡片 <span aria-hidden="true">⟶</span>';

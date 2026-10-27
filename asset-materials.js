@@ -10,7 +10,7 @@
     key:{frame:[324,126,135,66],edge:15,texture:[341,136,97,7],textureSize:[97,7]},
     activeKey:{frame:[623,125,150,69],edge:15,texture:[646,136,93,7],textureSize:[93,7]},
     pressedKey:{frame:[1407,133,130,75],edge:14,texture:[1423,146,95,5],textureSize:[95,5]},
-    seal:{frame:[449,365,84,36],edge:4,texture:[452,368,4,4],textureSize:[4,4]}
+    seal:{frame:[196,780,122,32],edge:3,texture:[202,786,12,18],textureSize:[12,18]}
   };
   function material(kind,extra='',actualWidth=0,actualHeight=0){
     const data=regions[kind], [sx,sy,sw,sh]=data.frame,e=data.edge;
@@ -22,6 +22,10 @@
     svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.setAttribute('preserveAspectRatio','none');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
     const tile=crop(data.texture,0,0,tw,th);
     let pieces=`<defs><pattern id="${id}" patternUnits="userSpaceOnUse" width="${tw*2}" height="${th*2}">${tile}<g transform="translate(${tw*2} 0) scale(-1 1)">${tile}</g><g transform="translate(0 ${th*2}) scale(1 -1)">${tile}</g><g transform="translate(${tw*2} ${th*2}) scale(-1 -1)">${tile}</g></pattern></defs><rect width="${width}" height="${height}" fill="url(#${id})"/>`;
+    if(kind==='paper'||kind==='card'){
+      const secondTile=crop([1180,948,380,42],0,0,157,41);
+      pieces+=`<defs><pattern id="${id}variation" patternUnits="userSpaceOnUse" width="314" height="82" x="-37" y="-19">${secondTile}<g transform="translate(314 0) scale(-1 1)">${secondTile}</g><g transform="translate(0 82) scale(1 -1)">${secondTile}</g><g transform="translate(314 82) scale(-1 -1)">${secondTile}</g></pattern></defs><rect width="${width}" height="${height}" fill="url(#${id}variation)" opacity=".3"/>`;
+    }
     const topY=data.topFromBottom?sy+sh-e:sy,bottomY=data.bottomFromTop?sy:sy+sh-e;
     pieces+=crop([sx,topY,e,e],0,0,border,border)+crop([sx+e,topY,sw-2*e,e],border,0,width-2*border,border)+crop([sx+sw-e,topY,e,e],width-border,0,border,border);
     pieces+=crop([sx,sy+e,e,sh-2*e],0,border,border,height-2*border)+crop([sx+sw-e,sy+e,e,sh-2*e],width-border,border,border,height-2*border);
