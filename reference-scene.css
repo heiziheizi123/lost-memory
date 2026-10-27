@@ -40,3 +40,11 @@
 .reference-scene.reduced-motion .opening-screen,.reference-scene.reduced-motion .opening-folder,.reference-scene.reduced-motion .opening-folder .stamp{animation:none;opacity:1}
 .reference-scene .opening,.reference-scene .welcome{background:#191d16}
 .opening-desk{position:absolute;top:0;left:0;right:0;height:190px;overflow:hidden;pointer-events:none;opacity:.65;z-index:-1}.opening-desk svg{width:100%;height:190px;object-fit:cover}
+/* A continuous restored character replaces polygon cutouts and pasted screen patches. */
+.reference-scene .sela-reference-figure{margin:12px 0 4px;height:350px}.reference-scene .sela-reference-figure>svg{filter:drop-shadow(2px 4px 4px #0003)}
+.phosphor-expression{filter:drop-shadow(0 0 1px #e5d6a177);opacity:.93}
+.reference-scene .assistant-toggle{transform:rotate(-2deg)}
+.reference-scene .assistant-note{transform:rotate(-2deg);margin-top:8px}
+.reference-scene .sela-expression-tile{background:transparent;border:0;box-shadow:none}
+@media(min-width:768px) and (max-width:1199px){.reference-scene .sela-reference-figure{height:255px}}
+@media(max-width:767px){.reference-scene .assistant-toggle,.reference-scene .assistant-note{transform:none}.reference-scene .assistant-note{margin:0}.reference-scene .sela-expression-tile{width:52px;height:58px}}

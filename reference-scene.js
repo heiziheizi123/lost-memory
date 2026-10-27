@@ -38,30 +38,30 @@
   const assistant=$('selaAssistant');
   $('selaPortrait').classList.add('original-line-portrait');
   const cutout=document.createElement('div');cutout.className='sela-reference-figure';cutout.setAttribute('aria-hidden','true');
-  // Polygon clipping is a browser presentation mask; the supplied bitmap is not altered.
-  cutout.innerHTML=`<svg viewBox="0 0 239 382" focusable="false"><defs><clipPath id="selaReferenceClip"><path d="M91 58L187 54 224 78 235 133 215 169 194 178 208 211 231 259 231 326 217 347 89 355 78 332 63 284 53 223 30 201 12 178 2 154 9 132 20 127 28 141 45 155 64 163 83 151 88 122 80 104Z"/></clipPath></defs><image href="${atlas}" x="-892" y="-286" width="1586" height="992" clip-path="url(#selaReferenceClip)"/></svg>`;
+  const portrait='assets/sela-restored-v2.webp';
+  cutout.innerHTML='<svg viewBox="0 0 1024 1536" focusable="false"><image href="'+portrait+'" width="1024" height="1536"/></svg>';
   assistant.insertBefore(cutout,$('assistantMessage'));
   const face=document.createElement('div');face.className='sela-expression-tile';assistant.append(face);
-  const antenna=document.createElementNS('http://www.w3.org/2000/svg','path');antenna.setAttribute('d','M137 66L125 26M170 61L194 32');antenna.setAttribute('fill','none');antenna.setAttribute('stroke','#b5a176');antenna.setAttribute('stroke-width','3');cutout.querySelector('svg').append(antenna);
-  const sourceScreens={
-    smile:[[1215,710],[1264,706],[1217,749]],thinking:[[1342,711],[1392,707],[1347,748]],
-    discovery:[[1480,709],[1529,706],[1482,749]],question:[[1210,860],[1258,846],[1219,894]],
-    warning:[[1341,852],[1394,851],[1341,891]],success:[[1471,851],[1522,843],[1477,894]]
+  // Only phosphor strokes change; the glass, lighting and perspective remain one image.
+  const expressions={
+    smile:'M25 24v11M75 24v11M38 48q12 15 24 0',
+    thinking:'M22 28h12M68 28h12M44 52h14',
+    discovery:'M25 20v15M75 20v15M45 48q5 -5 10 0q5 6 0 11q-5 5 -10 0q-5 -6 0 -11',
+    question:'M23 26l10 5M68 25l10 -5M40 52q10 -8 20 0',
+    warning:'M20 23l13 8l-13 8M80 23l-13 8l13 8M42 55l8 -7l8 7',
+    success:'M20 31q10 -14 20 0M60 31q10 -14 20 0M37 47q13 18 26 0'
   };
-  function screenMatrix([p0,p1,p2]){
-    const x1=p1[0]-p0[0],y1=p1[1]-p0[1],x2=p2[0]-p0[0],y2=p2[1]-p0[1],det=x1*y2-x2*y1;
-    const a=(92*y2+7*y1)/det,c=(-92*x2-7*x1)/det,b=(12*y2-52*y1)/det,d=(-12*x2+52*x1)/det;
-    return `matrix(${a} ${b} ${c} ${d} ${100-a*p0[0]-c*p0[1]} ${83-b*p0[0]-d*p0[1]})`;
+  function expressionMarkup(state){
+    const core=({mismatch:'warning',waiting:'smile',reading:'thinking',complete:'success'})[state]||state;
+    return '<path class="phosphor-expression" d="'+(expressions[core]||expressions.smile)+'" fill="none" stroke="#e6d7a4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>';
   }
   const mainFace=document.createElementNS('http://www.w3.org/2000/svg','g');mainFace.classList.add('reference-live-face');
-  mainFace.innerHTML=`<defs><clipPath id="sourceScreenClip"><path d="M103 83L190 94Q194 95 193 99L186 144Q185 148 181 147L96 136Q92 136 93 132L99 87Q99 83 103 83Z"/></clipPath></defs><g clip-path="url(#sourceScreenClip)"><image class="source-screen-image" href="${atlas}" width="1586" height="992"/></g><text class="source-screen-status" x="194" y="161" fill="#b99455" font-size="15" font-family="Georgia"/>`;
-  cutout.querySelector('svg').append(mainFace);
+  mainFace.setAttribute('transform','matrix(3.25 .54 -.657 3.485 443 298)');cutout.querySelector('svg').append(mainFace);
   function refreshFace(){
     const state=assistant.dataset.state||'smile';
-    face.innerHTML=sprite(state,(['success','complete'].includes(state)?crops.smile:crops[state])||crops.smile);face.dataset.expression=state;
-    const sourceState=({mismatch:'warning',waiting:'smile',reading:'thinking',success:'smile',complete:'smile'})[state]||state;
-    mainFace.dataset.expression=state;mainFace.querySelector('.source-screen-image').setAttribute('transform',screenMatrix(sourceScreens[sourceState]||sourceScreens.smile));
-    mainFace.querySelector('.source-screen-status').textContent=({mismatch:'≠',waiting:'…',reading:'⋯',success:'✓',complete:'✓'})[state]||'';
+    mainFace.dataset.expression=state;mainFace.innerHTML=expressionMarkup(state);
+    face.dataset.expression=state;
+    face.innerHTML='<svg viewBox="300 0 700 710" aria-hidden="true" focusable="false"><image href="'+portrait+'" width="1024" height="1536"/><g transform="matrix(3.25 .54 -.657 3.485 443 298)">'+expressionMarkup(state)+'</g></svg>';
   }
   new MutationObserver(refreshFace).observe(assistant,{attributes:true,attributeFilter:['data-state']});refreshFace();
   const openingDesk=desk.cloneNode(true);openingDesk.className='opening-desk';openingDesk.innerHTML=openingDesk.innerHTML.replaceAll('deskObjects','openingDeskObjects').replaceAll('deskShade','openingDeskShade');$('opening').prepend(openingDesk);
