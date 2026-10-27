@@ -3,7 +3,7 @@ const assert=require('assert');
 (async()=>{
  const browser=await chromium.launch({channel:process.env.TEST_BROWSER_CHANNEL||undefined,headless:true});
  try{
-  const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce'});
+  const page=await browser.newPage({viewport:{width:768,height:1024},hasTouch:true,isMobile:true,reducedMotion:'reduce'});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:8123');await page.waitForTimeout(1000);
   await page.locator('[data-folder=people]').click();
@@ -13,12 +13,14 @@ const assert=require('assert');
   assert.equal(await page.locator('.folder-tabs [aria-current=page]').count(),1);
   assert.equal(await page.locator('.folder-tabs [aria-current=page]').getAttribute('data-folder'),'evidence');
   await page.locator('[data-folder=archive]').click();
+  await page.setViewportSize({width:390,height:640});
   await page.getByRole('button',{name:'案件推演',exact:true}).click();
   assert.equal(await page.locator('body').getAttribute('data-view'),'reasoning');
   const cdp=await page.context().newCDPSession(page);
   await page.locator('.front').scrollIntoViewIfNeeded();
   const box=await page.locator('.front').boundingBox();const x=box.x+box.width/2,y=Math.min(box.y+box.height/2,650);
   const before=await page.evaluate(()=>scrollY),selected=await page.locator('.deck-status').textContent();
+  assert(await page.evaluate(()=>document.documentElement.scrollHeight>innerHeight),'touch-scroll scenario needs content taller than the viewport');
   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});
   for(let dy=10;dy<=110;dy+=10){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-dy}]});await page.waitForTimeout(25);}
   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(350);

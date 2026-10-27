@@ -5,9 +5,9 @@ await page.goto('http://127.0.0.1:8123');assert(await page.locator('#opening').i
 await page.locator('[data-view=reasoning]').click();
 async function swipe(distance,pause=0){const box=await page.locator('.front').boundingBox(),x=box.x+box.width*.6,y=box.y+box.height*.5;await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+distance,y,{steps:8});if(pause)await page.waitForTimeout(pause);await page.mouse.up();await page.waitForTimeout(350);}
 await swipe(-160);assert((await page.locator('.deck-status').textContent()).includes('02'),'distance swipe');
-if(await page.locator('#deckList').isVisible())await page.locator('[data-deck=expand]').click();
+if(await page.locator('#deckList').isVisible())await page.getByRole('button',{name:'关闭推理卡片列表'}).click();
 await swipe(-15,160);assert((await page.locator('.deck-status').textContent()).includes('02'),'short drag should restore');
-await page.locator('[data-deck=expand]').click();
+await page.getByRole('button',{name:'关闭推理卡片列表'}).click();
 const b=await page.locator('.front').boundingBox();await page.mouse.move(b.x+100,b.y+50);await page.mouse.down();await page.mouse.move(b.x+140,b.y+50,{steps:4});await page.locator('.deck-stage').dispatchEvent('pointercancel',{pointerId:1});await page.mouse.up();await page.waitForTimeout(300);assert.equal(await page.locator('.dragging').count(),0);
 await page.locator('[data-view=settings]').click();await page.locator('#muteMusic').check();await page.locator('#muteEffects').check();await page.locator('#reduceMotion').check();assert(await page.evaluate(()=>missingVideo.muted));
 await page.reload();assert.equal(await page.locator('#opening').isVisible(),false);await page.locator('[data-view=settings]').click();assert(await page.locator('#reduceMotion').isChecked());

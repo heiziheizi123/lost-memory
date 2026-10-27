@@ -22,6 +22,8 @@ The suites were also rerun after the user-reference implementation (Canva elemen
 
 Additional reference-layout regression checks pass: exactly one folder tab is active when switching between people and evidence; the original 案件推演 entry opens the reasoning view; Chromium CDP touch emulation permits vertical page scrolling without switching cards; a visualViewport resize event safely cancels an active drag; and an actual incorrect deduction changes the large SELA portrait to the mismatch expression while retaining zero completed deductions. These are emulated touch and viewport events, not real iOS keyboard certification.
 
+Phone reading redesign checks pass at 320, 360, 390 and 430px: a single short-label bottom navigation; collapsed assistant by default with an operable disclosure; no duplicate decorative photo or unavailable final deduction in the reading flow; expandable timeline retaining its content; card choice; no horizontal overflow; navigation/card controls at least 44px; and transition back to the full desktop dossier layout.
+
 ## Reproduce
 
 Install Node.js, then run `npm install`, `npx playwright install chromium`, and `npm test`. If using installed Edge, set `TEST_BROWSER_CHANNEL=msedge` instead of downloading Chromium. The runner serves the repository on 127.0.0.1:8123 and shuts down afterwards. Screenshots are written to ignored `tests/artifacts/`.

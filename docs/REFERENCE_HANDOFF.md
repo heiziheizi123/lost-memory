@@ -21,6 +21,7 @@ Canva image-to-design created a saved, independently editable reference with 59 
 - The new reference presentation is in `reference-scene.css` and `reference-scene.js`; the original game script and save-system.js are preserved. `case-ui.js` now preserves the card's baseline transform while dragging so a centered mobile card does not jump sideways.
 - Original P/L/R/C/RS facts and answers are retained. Reference photos are illustrative; the full-size photo is labeled accordingly. No weather, identity or driving-visibility conclusion from the illustrative mockup is added to the investigation.
 - Desktop matches the reference composition; compact phones use a readable single card and bottom navigation. The right-hand interaction instructions in the reference are a design guide, not permanently displayed game UI.
+- Following user feedback, phones now use a separate, simpler reading layout in mobile-ui.css: one paper surface, compact header, four short navigation labels, collapsed assistant, one prominent card, deduplicated detail text and optional timeline. Folder tabs and repeated photo decoration remain desktop-only. Unavailable final deductions stay hidden on phones until their original readiness conditions are met; those conditions themselves are unchanged.
 
 ## Deferred items
 

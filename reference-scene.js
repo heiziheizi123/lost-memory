@@ -13,7 +13,7 @@
   };
   function sprite(name,rect,extra='') {
     const [x,y,w,h]=rect;
-    return `<svg class="atlas-sprite ${extra}" viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false"><image href="${atlas}" x="${-x}" y="${-y}" width="1586" height="992"/></svg>`;
+    return `<svg class="atlas-sprite ${extra}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><image href="${atlas}" x="${-x}" y="${-y}" width="1586" height="992"/></svg>`;
   }
   document.body.classList.add('reference-scene');
   toggle=function(id){if(id==='restore')document.querySelector('.keycap-nav [data-view="reasoning"]').click();else if(id==='box')document.querySelector('.keycap-nav [data-view="evidence"]').click();};
@@ -21,7 +21,11 @@
   header.firstElementChild.innerHTML='<div class="paper-label">A · 纸质案件档案</div><div class="brand-line"><span class="wordmark">CODE SELA</span><h1>车祸现场男孩失踪案</h1></div><p class="desk-motto">TRUTH LIVES IN DETAILS</p>';
   const nav=document.querySelector('.keycap-nav');
   const labels={archive:'案件档案',evidence:'证据',reasoning:'案件还原',settings:'设置'};
-  nav.querySelectorAll('button').forEach(b=>b.textContent=labels[b.dataset.view]);
+  const compactLabels={archive:'档案',evidence:'证据',reasoning:'还原',settings:'设置'};
+  nav.querySelectorAll('button').forEach(b=>{
+    b.setAttribute('aria-label',labels[b.dataset.view]);
+    b.innerHTML=`<span class="nav-label-desktop">${labels[b.dataset.view]}</span><span class="nav-label-mobile" aria-hidden="true">${compactLabels[b.dataset.view]}</span>`;
+  });
   const tabs=document.createElement('nav');tabs.className='folder-tabs';tabs.setAttribute('aria-label','卷宗分类');
   tabs.innerHTML=[['01','案发现场','archive'],['02','相关人员','people'],['03','物证调查','evidence'],['04','推理分析','reasoning']].map(([n,label,view])=>`<button data-folder="${view}"><span>${n}</span><strong>${label}</strong><i aria-hidden="true"></i></button>`).join('');
   document.querySelector('.wrap').prepend(tabs);
@@ -66,6 +70,25 @@
   $('restore').querySelector('p.small').classList.add('reasoning-guidance');
   const illustration=document.createElement('figure');illustration.className='selected-illustration';illustration.innerHTML=sprite('road',[451,410,193,156])+'<figcaption>档案插图 · 事实以原始记录为准</figcaption>';
   $('restoreBody').after(illustration);
+  function markFinalDeduction(){
+    const card=$('restoreBody').querySelectorAll('.restore-card')[9];
+    if(card){card.classList.add('final-deduction');card.classList.toggle('is-locked',!ready(RS[9])&&!st.rest.has('r10'));}
+  }
+  new MutationObserver(markFinalDeduction).observe($('restoreBody'),{childList:true});markFinalDeduction();
+  const phone=matchMedia('(max-width:767px)');
+  const timeline=document.querySelector('.timeline');
+  const timelineToggle=document.createElement('button');timelineToggle.className='mobile-timeline-toggle';timelineToggle.setAttribute('aria-controls','caseTimeline');
+  timelineToggle.innerHTML='<span>已核实的时间线</span><span class="timeline-count"></span>';timeline.prepend(timelineToggle);
+  function updateTimelineLabel(){timelineToggle.querySelector('.timeline-count').textContent=st.rest.size+' 条 · '+($('caseTimeline').hidden?'展开':'收起');timelineToggle.setAttribute('aria-expanded',String(!$('caseTimeline').hidden));}
+  timelineToggle.addEventListener('click',()=>{$('caseTimeline').hidden=!$('caseTimeline').hidden;updateTimelineLabel();});
+  new MutationObserver(updateTimelineLabel).observe($('caseProgress'),{childList:true});
+  function updateAssistantSummary(){if(phone.matches)$('assistantToggle').firstElementChild.textContent=$('selaStatus').textContent.replace('SELA：','SELA · ');else $('assistantToggle').firstElementChild.textContent='SELA / 调查助手';}
+  new MutationObserver(updateAssistantSummary).observe($('selaStatus'),{childList:true});
+  function adaptReadingLayout(){
+    assistant.classList.toggle('collapsed',phone.matches);$('assistantToggle').setAttribute('aria-expanded',String(!phone.matches));$('assistantToggle').lastElementChild.textContent=phone.matches?'+':'−';
+    $('caseTimeline').hidden=phone.matches;updateTimelineLabel();updateAssistantSummary();
+  }
+  phone.addEventListener('change',adaptReadingLayout);adaptReadingLayout();
   function positionIllustration(){illustration.style.setProperty('--detail-photo-top',($('restoreBody').offsetTop+28)+'px');}
   new ResizeObserver(positionIllustration).observe($('restoreBody'));positionIllustration();
   const facts=['家属口述与现场声音','撞击后的独立口述','车门、鞋印与随身物品','现场处置与身份核验','事故点至桥东的目击','离店时间与出租车行程','侧脸与纸本缩写','搜索范围与车辆里程','南环旧账与再次上车'];

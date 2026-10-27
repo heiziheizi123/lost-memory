@@ -57,7 +57,7 @@
     setState(name,text);
   };
   function updateProgress() {
-    $('caseProgress').textContent = `推演 ${st.rest.size} / ${RS.length} · 记录 ${st.seen.size} / ${Object.keys(R).length}`;
+    $('caseProgress').innerHTML = `<span>推演 ${st.rest.size} / ${RS.length}</span><span>记录 ${st.seen.size} / ${Object.keys(R).length}</span>`;
     $('caseTimeline').replaceChildren();
     RS.filter(r => st.rest.has(r.id)).forEach(r => { const li=document.createElement('li'); li.textContent=r.end; $('caseTimeline').append(li); });
     if (!st.rest.size) { const li=document.createElement('li'); li.textContent='完成推演后，将核实的结论按顺序归档。'; $('caseTimeline').append(li); }
@@ -133,6 +133,7 @@
       button.innerHTML=`<span>REASONING / ${String(RS.indexOf(r)+1).padStart(2,'0')}</span><strong>${r.n.split('｜')[1]}</strong><small>${st.rest.has(r.id)?'已核实':ready(r)?'资料齐全 · 等待推演':'资料尚未齐全'}</small>`;
       button.setAttribute('aria-hidden',depth===0?'false':'true');stage.append(button);
     }
+    const dismiss=document.createElement('button');dismiss.className='deck-dismiss';dismiss.dataset.deck='close';dismiss.textContent='关闭 ×';dismiss.setAttribute('aria-label','关闭推理卡片列表');$('deckList').append(dismiss);
     RS.slice(0,9).forEach(r=>{const button=document.createElement('button');button.textContent=r.n;button.dataset.choose=r.id;button.setAttribute('aria-pressed',String(r.id===current));$('deckList').append(button);});
     stage.addEventListener('pointerdown',startDrag);
     stage.addEventListener('pointermove',moveDrag);
@@ -152,6 +153,7 @@
   $('reasoningDeck').addEventListener('click',e=>{
     const choose=e.target.closest('[data-choose]');if(choose)return selectCard(RS.findIndex(r=>r.id===choose.dataset.choose),true);
     const action=e.target.closest('[data-deck]')?.dataset.deck;if(!action)return;
+    if(action==='close')return closeDeck();
     if(action==='expand'){expanded=!expanded;drawDeck();(expanded?$('deckList').querySelector('[aria-pressed=true]'):$('reasoningDeck').querySelector('[data-deck=expand]')).focus({preventScroll:true});}
     else selectCard((RS.findIndex(r=>r.id===current)+(action==='next'?1:8))%9,true);
   });
