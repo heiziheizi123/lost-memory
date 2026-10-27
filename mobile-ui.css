@@ -1,0 +1,65 @@
+/* Phone-specific reading layout. The desktop reference scene stays unchanged. */
+.nav-label-mobile,.mobile-timeline-toggle,.deck-dismiss{display:none}
+.case-progress>span:first-child:after{content:' · '}
+@media(max-width:767px){
+  .reference-scene{padding:16px 12px calc(96px + env(safe-area-inset-bottom));background:#1a1e18;overflow-x:clip}
+  .reference-scene .desk-decoration,.reference-scene .paper-label,.reference-scene .folder-tabs,.reference-scene .wrap:before,.reference-scene .wrap:after{display:none}
+  .reference-scene .case-header{min-height:0;margin:0 0 18px;padding:0;display:flex;align-items:flex-start;gap:12px}
+  .reference-scene .brand-line{display:block}.reference-scene .wordmark{font:25px/1.1 Georgia,serif;letter-spacing:-1px;color:#eee5d0}
+  .reference-scene .case-header h1{font:13px/1.5 'Microsoft YaHei',sans-serif;color:#bfb7a3;margin-top:7px}
+  .reference-scene .case-progress{flex:none;position:static;max-width:95px;white-space:normal;text-align:right;font:11px/1.7 Consolas,monospace;color:#c6b99d;margin:0;padding:0}
+  .case-progress>span{display:block;white-space:nowrap}.case-progress>span:first-child:after{content:none}
+  .reference-scene .wrap{margin:0;gap:16px}.reference-scene .main{gap:16px}
+  .reference-scene .panel,.reference-scene #box,.reference-scene #restore{border:1px solid #c5b99e;border-radius:9px;box-shadow:0 3px 12px #0002;padding:18px;background:#eae1cc}
+  .reference-scene .reference-texture{opacity:.12}
+  .reference-scene .panel h2,.reference-scene #box h2{font-size:23px;margin-bottom:16px}
+  .reference-scene #restore{padding:20px 16px 16px;overflow:visible}
+  .reference-scene #restore>h2{font-size:29px;line-height:1.25;margin:0 0 12px}
+  .reference-scene #restore>h2:after{width:30px;height:2px;margin-top:9px}
+  .reference-scene .reasoning-intro{margin:0;border:0;padding:0}
+  .reference-scene .reasoning-intro p{font:14px/1.7 'Microsoft YaHei',sans-serif;color:#655b49;margin:0}
+  .reference-scene .reasoning-guidance{display:none}
+  .reference-scene .assistant-slot{margin:0}
+  .reference-scene .assistant-slot .assistant{margin-bottom:0}
+  .reference-scene .assistant{background:#282d23;border:1px solid #4c5141;border-radius:8px;box-shadow:none;padding:8px 10px;margin:0 0 16px;color:#e7dec7;grid-template-columns:44px minmax(0,1fr);gap:5px 10px}
+  .reference-scene .assistant-toggle{color:#e2d7bc;min-height:44px;padding:8px 0;border:0;background:transparent;font:14px/1.5 'Microsoft YaHei',sans-serif}
+  .reference-scene .assistant.collapsed{margin-bottom:0;padding:0 12px}
+  .reference-scene .assistant-note{background:transparent;padding:0;transform:none;border:0;box-shadow:none}
+  .reference-scene .assistant #selaStatus{display:none}.reference-scene .assistant #selaMessage{font:14px/1.6 'Microsoft YaHei',sans-serif;color:#e7dec7}
+  .reference-scene .sela-expression-tile{width:44px;height:48px;border-radius:5px}
+  .reference-scene .deck-stage{height:279px;margin:20px auto 12px;width:100%;max-width:370px;perspective:none}
+  .reference-scene .deck-card{width:calc(100% - 12px);max-width:352px;height:258px;top:0;left:50%;padding:12px 14px;border:1px solid #b19d76;border-radius:7px;background:#d3c5a7;box-shadow:0 2px 3px #43351d26;transform:translateX(-50%) translateY(calc(var(--depth)*4px)) scale(calc(1 - var(--depth)*.025))}
+  .reference-scene .deck-card.front{background:#f1e9d6;transform:translateX(-50%);border:1px solid #b7a481;box-shadow:0 5px 12px #51402724}
+  .reference-scene .deck-card.front>span{margin:0 0 10px;padding:2px 8px;border:0;border-radius:3px;transform:none;font:12px/1.6 'Microsoft YaHei',sans-serif;letter-spacing:.08em}
+  .reference-scene .reasoning-photo{height:118px;border:0;outline:0;border-radius:3px;filter:saturate(.65)}
+  .reference-scene .deck-card strong{font:700 17px/1.5 'Microsoft YaHei',sans-serif;margin:10px 0 3px;min-height:0}
+  .reference-scene .deck-card small{font:12px/1.5 'Microsoft YaHei',sans-serif;color:#74664c}
+  .reference-scene .card-excerpt,.reference-scene .paperclip,.reference-scene .drag-caption,.reference-scene .deck-status{display:none}
+  .reference-scene .deck-controls{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:6px}
+  .reference-scene .deck-controls button{padding:8px 4px;min-height:44px;font:13px/1.4 'Microsoft YaHei',sans-serif;border:1px solid #b4a583;background:#e6d9bd;box-shadow:none;border-radius:5px}
+  .reference-scene .deck-controls [data-deck=expand]{color:#742d27;background:#f4ebd8;border-color:#a88b61}
+  .reference-scene .deck-list.open{left:10px;right:10px;bottom:calc(86px + env(safe-area-inset-bottom));padding:12px;gap:6px;border:1px solid #b4a17b;border-radius:12px 12px 4px 4px;background:#eee4cd;box-shadow:0 -10px 32px #0005;max-height:52dvh}
+  .reference-scene .deck-list button{border-radius:4px;font:14px/1.6 'Microsoft YaHei',sans-serif;background:#f7efd9;min-height:48px}
+  .reference-scene .deck-list .deck-dismiss{display:block;position:sticky;top:0;z-index:2;text-align:right;color:#742d27;background:#eee4cd;border:0;border-bottom:1px solid #c5b699;border-radius:0;min-height:44px}
+  .reference-scene #restoreBody{margin-top:22px;padding:18px 0 0;border:0;border-top:1px solid #c5b699;box-shadow:none;background:transparent;min-height:0}
+  .reference-scene #restoreBody:before{content:'当前推演';margin:0 0 9px;padding:0;border:0;background:transparent;color:#86714d;font:12px/1.5 'Microsoft YaHei',sans-serif;letter-spacing:.12em}
+  .reference-scene .restore-card{margin:0 0 18px}.reference-scene .restore-card>b{font:700 18px/1.6 'Microsoft YaHei',sans-serif;color:#30271c}
+  .reference-scene .restore-card:not(.final-deduction)>b{display:none}
+  .reference-scene .restore-card p{font:16px/1.8 'Microsoft YaHei',sans-serif;margin:10px 0}
+  .reference-scene .final-deduction.is-locked,.reference-scene .selected-illustration{display:none}
+  .reference-scene .timeline{margin-top:8px;border-top:1px solid #c5b699;padding-top:4px}
+  .reference-scene .timeline>h3{display:none}
+  .mobile-timeline-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;padding:8px 0;border:0;background:transparent;font:14px/1.5 'Microsoft YaHei',sans-serif;color:#6f5c3b;text-align:left;box-shadow:none}
+  .reference-scene .timeline ol{padding-left:22px;font-size:15px;margin-top:8px}
+  .reference-scene .keycap-nav{gap:8px;padding:10px 12px calc(12px + env(safe-area-inset-bottom));background:#22271f;border-top:1px solid #4d5143}
+  .reference-scene .keycap-nav button{min-height:48px;padding:8px 4px;font:700 14px/1.4 'Microsoft YaHei',sans-serif;transform:none;border:1px solid #a5997b;border-bottom:3px solid #8d8064;border-radius:6px;box-shadow:0 2px #0e120d;background:#e5dbc3;white-space:nowrap}
+  .reference-scene .keycap-nav button:nth-child(2n){transform:none}
+  .reference-scene .keycap-nav button[aria-current=page]{outline:0;background:#f5e9d0;border-color:#a06351;color:#732b25;box-shadow:inset 0 2px #8d2926,0 2px #0e120d}
+  .reference-scene .keycap-nav button:active,.reference-scene .keycap-nav button[data-pressed=true]{transform:translateY(3px);box-shadow:inset 0 2px 4px #0004}
+  .nav-label-desktop{display:none}.nav-label-mobile{display:inline}
+  .reference-scene #out{height:350px;border-radius:9px}.reference-scene .record{padding:12px;background:#f4eddc;border-left-width:2px}
+  .reference-scene .row button{font-size:14px;min-height:46px;box-shadow:none;background:#e0d2b4;border-radius:5px}
+  .reference-scene .chip{font:14px/1.6 'Microsoft YaHei',sans-serif;padding:10px 12px;border-radius:5px;background:#f0e7d2;box-shadow:none}
+  .reference-scene .side{gap:16px}.reference-scene .blank{margin:9px 0;border-radius:4px}.reference-scene .blank select{font-size:16px}
+}
+@media(max-width:359px){.reference-scene{padding-left:10px;padding-right:10px}.reference-scene #restore{padding:18px 14px 14px}.reference-scene .case-header h1{font-size:12px}.reference-scene .case-progress{max-width:83px;font-size:10px}}

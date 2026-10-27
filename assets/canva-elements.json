@@ -1,0 +1,710 @@
+{
+  "design_id": "DAHZIehdGUg",
+  "saved_reference_url": "https://www.canva.com/d/xmZm0GD_8Vrws6h",
+  "source_dimensions": {
+    "width": 1586,
+    "height": 992
+  },
+  "elements": [
+    {
+      "asset_id": "MAHZIaJUAzc",
+      "element_id": "PBbp85nQGDkxC7VN"
+    },
+    {
+      "asset_id": "MAHZIV0KLcI",
+      "element_id": "PBbp85nQGDkxC7VN-LB9q7DjM7WS8jV3J",
+      "position": {
+        "top": 152,
+        "left": 0
+      },
+      "dimensions": {
+        "width": 20,
+        "height": 840
+      }
+    },
+    {
+      "asset_id": "MAHZIW0INB0",
+      "element_id": "PBbp85nQGDkxC7VN-LBkT6ZMQWhsxf3mD",
+      "position": {
+        "top": 0,
+        "left": 39
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIVK2qsw",
+      "element_id": "PBbp85nQGDkxC7VN-LBs60Qdt5c9y52lN",
+      "position": {
+        "top": 114,
+        "left": 297
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZITTJBOM",
+      "element_id": "PBbp85nQGDkxC7VN-LB4qWQq15P2d53LK",
+      "position": {
+        "top": 114,
+        "left": 455
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZISPHQVU",
+      "element_id": "PBbp85nQGDkxC7VN-LBMT1F6brRXbcBQP",
+      "position": {
+        "top": 114,
+        "left": 614
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIatVSkE",
+      "element_id": "PBbp85nQGDkxC7VN-LBD0FkJxM1jSr6sf",
+      "position": {
+        "top": 114,
+        "left": 773
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIRb8C00",
+      "element_id": "PBbp85nQGDkxC7VN-LBVlg9rJnpTfrRXS",
+      "position": {
+        "top": 0,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 417,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIQNBiko",
+      "element_id": "PBbp85nQGDkxC7VN-LBktWHhWsdhv2Nyp",
+      "position": {
+        "top": 76,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIVjAJLY",
+      "element_id": "PBbp85nQGDkxC7VN-LBTXrLxxgdZh82Fk",
+      "position": {
+        "top": 114,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 398,
+        "height": 134
+      }
+    },
+    {
+      "asset_id": "MAHZIWd6mK4",
+      "element_id": "PBbp85nQGDkxC7VN-LBGy3hSxChFXRtxc",
+      "position": {
+        "top": 114,
+        "left": 1189
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 96
+      }
+    },
+    {
+      "asset_id": "MAHZIYKj_JE",
+      "element_id": "PBbp85nQGDkxC7VN-LBPHKt3YbR6qHrg6",
+      "position": {
+        "top": 152,
+        "left": 1348
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIXwNcuI",
+      "element_id": "PBbp85nQGDkxC7VN-LBjxmfrFmcLsXx1C",
+      "position": {
+        "top": 114,
+        "left": 1387
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 96
+      }
+    },
+    {
+      "asset_id": "MAHZITILrHQ",
+      "element_id": "PBbp85nQGDkxC7VN-LBLRFyx6cPXrW34G",
+      "position": {
+        "top": 248,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIYvmAl4",
+      "element_id": "PBbp85nQGDkxC7VN-LBSJHNcjDZ29Mv53",
+      "position": {
+        "top": 267,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 398,
+        "height": 134
+      }
+    },
+    {
+      "asset_id": "MAHZIQmT3C8",
+      "element_id": "PBbp85nQGDkxC7VN-LB5Zr9jJjfBYnCXd",
+      "position": {
+        "top": 286,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIY9zPqE",
+      "element_id": "PBbp85nQGDkxC7VN-LBKYW1s7nkWPbMcR",
+      "position": {
+        "top": 286,
+        "left": 1308
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIX5K_kU",
+      "element_id": "PBbp85nQGDkxC7VN-LBRTSHT10xcp3dBT",
+      "position": {
+        "top": 286,
+        "left": 1447
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 77
+      }
+    },
+    {
+      "asset_id": "MAHZIbYVNTQ",
+      "element_id": "PBbp85nQGDkxC7VN-LBHsQnl3sYjj6J9w",
+      "position": {
+        "top": 305,
+        "left": 1288
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 20
+      }
+    },
+    {
+      "asset_id": "MAHZIQEkQqE",
+      "element_id": "PBbp85nQGDkxC7VN-LBt7hYxSKDnSzwm7",
+      "position": {
+        "top": 305,
+        "left": 1407
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 20
+      }
+    },
+    {
+      "asset_id": "MAHZIaFIS0g",
+      "element_id": "PBbp85nQGDkxC7VN-LBDm84VhjXdFfN7Z",
+      "position": {
+        "top": 381,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 58
+      }
+    },
+    {
+      "asset_id": "MAHZIYYWULE",
+      "element_id": "PBbp85nQGDkxC7VN-LBlmNSqhJYzvRyMX",
+      "position": {
+        "top": 419,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 239,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIZZyhCs",
+      "element_id": "PBbp85nQGDkxC7VN-LBZyf6zdLB2Yd8kK",
+      "position": {
+        "top": 476,
+        "left": 1268
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 78
+      }
+    },
+    {
+      "asset_id": "MAHZIUn1_Cg",
+      "element_id": "PBbp85nQGDkxC7VN-LBlRnbCCCbTSy5Ph",
+      "position": {
+        "top": 419,
+        "left": 1387
+      },
+      "dimensions": {
+        "width": 180,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIT_btGs",
+      "element_id": "PBbp85nQGDkxC7VN-LBX9sgDZCqYpybY7",
+      "position": {
+        "top": 438,
+        "left": 1506
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIcZy7IE",
+      "element_id": "PBbp85nQGDkxC7VN-LBrsTGPG2lpb9cST",
+      "position": {
+        "top": 629,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIYAWQLE",
+      "element_id": "PBbp85nQGDkxC7VN-LByH1DQKksmDqbsM",
+      "position": {
+        "top": 667,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIWBSGDY",
+      "element_id": "PBbp85nQGDkxC7VN-LBBjtWrQmG1p6TNZ",
+      "position": {
+        "top": 667,
+        "left": 1189
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 116
+      }
+    },
+    {
+      "asset_id": "MAHZIcZrSMo",
+      "element_id": "PBbp85nQGDkxC7VN-LB0zXZ66C74nd6zP",
+      "position": {
+        "top": 667,
+        "left": 1288
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIaKYHAY",
+      "element_id": "PBbp85nQGDkxC7VN-LBRg8NGGY003QhDs",
+      "position": {
+        "top": 667,
+        "left": 1308
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 116
+      }
+    },
+    {
+      "asset_id": "MAHZIY9YAcM",
+      "element_id": "PBbp85nQGDkxC7VN-LBJj2fp4gMnR3mwG",
+      "position": {
+        "top": 667,
+        "left": 1427
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIUczYc0",
+      "element_id": "PBbp85nQGDkxC7VN-LBFlNRDzFDq8K9WC",
+      "position": {
+        "top": 667,
+        "left": 1447
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 116
+      }
+    },
+    {
+      "asset_id": "MAHZIfVKXSU",
+      "element_id": "PBbp85nQGDkxC7VN-LBg8DSPdbBSwPYNR",
+      "position": {
+        "top": 801,
+        "left": 1169
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 134
+      }
+    },
+    {
+      "asset_id": "MAHZIQ84XLA",
+      "element_id": "PBbp85nQGDkxC7VN-LBDzkQzmyjyFShmW",
+      "position": {
+        "top": 820,
+        "left": 1189
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 96
+      }
+    },
+    {
+      "asset_id": "MAHZISd3UWY",
+      "element_id": "PBbp85nQGDkxC7VN-LBQGjgcw4nb0XDDk",
+      "position": {
+        "top": 801,
+        "left": 1288
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 134
+      }
+    },
+    {
+      "asset_id": "MAHZIR3Qbc8",
+      "element_id": "PBbp85nQGDkxC7VN-LBC9QJVBqXD0CFMJ",
+      "position": {
+        "top": 820,
+        "left": 1308
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 96
+      }
+    },
+    {
+      "asset_id": "MAHZIZdg0VI",
+      "element_id": "PBbp85nQGDkxC7VN-LBqY7c6f1zvHgVgN",
+      "position": {
+        "top": 801,
+        "left": 1427
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 134
+      }
+    },
+    {
+      "asset_id": "MAHZIcjzEIA",
+      "element_id": "PBbp85nQGDkxC7VN-LBTSw0sVYsmxKhNM",
+      "position": {
+        "top": 820,
+        "left": 1447
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 96
+      }
+    },
+    {
+      "asset_id": "MAHZIacXTu8",
+      "element_id": "PBbp85nQGDkxC7VN-LBJ9KTs770XBHxZ3",
+      "position": {
+        "top": 858,
+        "left": 1506
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 58
+      }
+    },
+    {
+      "asset_id": "MAHZIdmpc9E",
+      "element_id": "PBbp85nQGDkxC7VN-LBmkVYNZyvLrKYVZ",
+      "position": {
+        "top": 171,
+        "left": 0
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 173
+      }
+    },
+    {
+      "asset_id": "MAHZIWvCXVg",
+      "element_id": "PBbp85nQGDkxC7VN-LBtJB6wD8cS30zzt",
+      "position": {
+        "top": 305,
+        "left": 0
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 153
+      }
+    },
+    {
+      "asset_id": "MAHZISty-CI",
+      "element_id": "PBbp85nQGDkxC7VN-LBmBQVgfstTRxqh6",
+      "position": {
+        "top": 438,
+        "left": 0
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZITOYdTA",
+      "element_id": "PBbp85nQGDkxC7VN-LBbpSYRCZ0qZ2mSn",
+      "position": {
+        "top": 553,
+        "left": 0
+      },
+      "dimensions": {
+        "width": 179,
+        "height": 153
+      }
+    },
+    {
+      "asset_id": "MAHZIXVabRI",
+      "element_id": "PBbp85nQGDkxC7VN-LBhsv4kr0Gvxdg0H",
+      "position": {
+        "top": 286,
+        "left": 198
+      },
+      "dimensions": {
+        "width": 655,
+        "height": 20
+      }
+    },
+    {
+      "asset_id": "MAHZIQ4PWGI",
+      "element_id": "PBbp85nQGDkxC7VN-LB0rn1Kh9xsznp7k",
+      "position": {
+        "top": 305,
+        "left": 674
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIU66Uxo",
+      "element_id": "PBbp85nQGDkxC7VN-LBBMnJpcRGwHtr6X",
+      "position": {
+        "top": 343,
+        "left": 158
+      },
+      "dimensions": {
+        "width": 774,
+        "height": 382
+      }
+    },
+    {
+      "asset_id": "MAHZIUlp0qw",
+      "element_id": "PBbp85nQGDkxC7VN-LBwVMBGw0sWDrsPk",
+      "position": {
+        "top": 362,
+        "left": 436
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIainrw4",
+      "element_id": "PBbp85nQGDkxC7VN-LBjZyzC6fJSpkM8g",
+      "position": {
+        "top": 400,
+        "left": 436
+      },
+      "dimensions": {
+        "width": 219,
+        "height": 173
+      }
+    },
+    {
+      "asset_id": "MAHZIa53q8M",
+      "element_id": "PBbp85nQGDkxC7VN-LB007kkGvt5ZmRG0",
+      "position": {
+        "top": 648,
+        "left": 614
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 58
+      }
+    },
+    {
+      "asset_id": "MAHZIYr4DTQ",
+      "element_id": "PBbp85nQGDkxC7VN-LBV5VGz016yt62Zy",
+      "position": {
+        "top": 705,
+        "left": 654
+      },
+      "dimensions": {
+        "width": 60,
+        "height": 59
+      }
+    },
+    {
+      "asset_id": "MAHZIV36flA",
+      "element_id": "PBbp85nQGDkxC7VN-LBZtBk6vsBd1V2mr",
+      "position": {
+        "top": 686,
+        "left": 277
+      },
+      "dimensions": {
+        "width": 536,
+        "height": 78
+      }
+    },
+    {
+      "asset_id": "MAHZIUmj5xY",
+      "element_id": "PBbp85nQGDkxC7VN-LBJ2C64csQTr35G7",
+      "position": {
+        "top": 763,
+        "left": 178
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 58
+      }
+    },
+    {
+      "asset_id": "MAHZIV5ZT7w",
+      "element_id": "PBbp85nQGDkxC7VN-LBq5DjQvrHD9lpdy",
+      "position": {
+        "top": 820,
+        "left": 297
+      },
+      "dimensions": {
+        "width": 21,
+        "height": 39
+      }
+    },
+    {
+      "asset_id": "MAHZIZ3-GMw",
+      "element_id": "PBbp85nQGDkxC7VN-LBtmswgPbkLjnZ1G",
+      "position": {
+        "top": 209,
+        "left": 852
+      },
+      "dimensions": {
+        "width": 239,
+        "height": 135
+      }
+    },
+    {
+      "asset_id": "MAHZIeDVah0",
+      "element_id": "PBbp85nQGDkxC7VN-LBVxs6ncDMjDt3pP",
+      "position": {
+        "top": 286,
+        "left": 892
+      },
+      "dimensions": {
+        "width": 239,
+        "height": 382
+      }
+    },
+    {
+      "asset_id": "MAHZIfTFQn4",
+      "element_id": "PBbp85nQGDkxC7VN-LB9rrz6JZ88PNv0m",
+      "position": {
+        "top": 610,
+        "left": 911
+      },
+      "dimensions": {
+        "width": 239,
+        "height": 173
+      }
+    },
+    {
+      "asset_id": "MAHZIawyLs4",
+      "element_id": "PBbp85nQGDkxC7VN-LBwPngggcFwcxjLz",
+      "position": {
+        "top": 763,
+        "left": 753
+      },
+      "dimensions": {
+        "width": 338,
+        "height": 191
+      }
+    },
+    {
+      "asset_id": "MAHZIYIiq1Y",
+      "element_id": "PBbp85nQGDkxC7VN-LB9gSQTmdFSmL0dZ",
+      "position": {
+        "top": 763,
+        "left": 1030
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 58
+      }
+    },
+    {
+      "asset_id": "MAHZIRUV1LI",
+      "element_id": "PBbp85nQGDkxC7VN-LBwMwcW4N60jl2q6",
+      "position": {
+        "top": 896,
+        "left": 1030
+      },
+      "dimensions": {
+        "width": 41,
+        "height": 39
+      }
+    }
+  ]
+}

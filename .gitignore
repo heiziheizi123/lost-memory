@@ -1,0 +1,3 @@
+node_modules/
+tests/artifacts/
+tests/test-results.json

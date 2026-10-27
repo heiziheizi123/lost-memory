@@ -1,0 +1,35 @@
+# CODE SELA UI regression results
+
+Tested on 2026-10-27 with Playwright 1.62.1 and installed Microsoft Edge (Chromium), Windows.
+
+## Automated checks passed
+
+- 1440×1000 desktop, 768×1024 tablet, and 320×740 compact phone layouts.
+- Search all 16 original person/place records; all 8 original item combinations unlock every deduction.
+- Complete r1–r9 and final r10, build ten timeline entries, save version-1 state, reload, continue and reach ending.html with lost_memory_complete=1.
+- Incorrect deduction retains selected terms, marks the sentence slot and gives a specific clue; it does not advance progress.
+- Click card list, previous/next and keyboard arrow alternatives.
+- Distance swipe changes the selected card; a short, slow drag restores it. Pointer cancellation clears dragging. Viewport rotation/resize leaves no dragging state.
+- No horizontal document overflow at 320px. Tested navigation buttons are 52px tall; settings labels provide 52px activation areas.
+- Reduced-motion system preference skips the long opening; normal opening is skippable. Continue bypasses the opening.
+- Separate media/effect mute preferences and motion preference persist across refresh.
+- Legacy version-1 save maps 事故后存活→事故后仍有哭声 and 现场封锁→外围未封闭, retains deduction state and normalizes 六岁/6岁→三岁/3岁.
+- No JavaScript page errors during these scenarios.
+
+The main investigation script, save-system.js, ending.html and thanks.html are preserved. No story, answer or unlock-condition changes are intended.
+
+The suites were also rerun after the user-reference implementation (Canva element decomposition, local reference atlas, fanned cards, folder tabs, separate views and reference SELA illustration). The card drag transform includes its layout baseline, preserving centered placement on mobile. `docs/REFERENCE_HANDOFF.md` lists Canva's paid-feature limitation and the deferred approval/export steps.
+
+Additional reference-layout regression checks pass: exactly one folder tab is active when switching between people and evidence; the original 案件推演 entry opens the reasoning view; Chromium CDP touch emulation permits vertical page scrolling without switching cards; a visualViewport resize event safely cancels an active drag; and an actual incorrect deduction changes the large SELA portrait to the mismatch expression while retaining zero completed deductions. These are emulated touch and viewport events, not real iOS keyboard certification.
+
+Phone reading redesign checks pass at 320, 360, 390 and 430px: a single short-label bottom navigation; collapsed assistant by default with an operable disclosure; no duplicate decorative photo or unavailable final deduction in the reading flow; expandable timeline retaining its content; card choice; no horizontal overflow; navigation/card controls at least 44px; and transition back to the full desktop dossier layout.
+
+2026-10-28 material-retention acceptance: tests/materials.cjs checks archive/evidence/reasoning/settings at 320×740, 390×844, 768×1024 and 1440×1000. Visible controls pass center-point hit testing after scrolling into view, and all widths remain free of document horizontal overflow. Pointer and keyboard keycap presses display the raster pressed asset and cancellation restores the normal asset. Continuous drag does not rebuild the current card's raster surfaces. Headless Edge animation-frame samples were about 6.1ms median / 6.2ms p95 on this host; these samples are a local rendering check, not a real-phone frame-rate guarantee. Screenshots were inspected for stray neighboring text in material crops; the paper border uses clean reference margins.
+
+## Reproduce
+
+Install Node.js, then run `npm install`, `npx playwright install chromium`, and `npm test`. If using installed Edge, set `TEST_BROWSER_CHANNEL=msedge` instead of downloading Chromium. The runner serves the repository on 127.0.0.1:8123 and shuts down afterwards. Screenshots are written to ignored `tests/artifacts/`.
+
+## Still requires device validation
+
+These checks are Chromium automation, not Safari or Android certification. Android Chrome, iOS Safari and iPad Safari on actual devices have not been tested. Verify safe-area rendering, real touch scrolling versus swiping, software keyboard opening, system gesture interruption, real video playback and the complete flow on those devices. The existing binary media files were not downloaded into the local test workspace, so media playback and the images on the thanks page are not covered by the automated run. Their repository paths and files are unchanged.

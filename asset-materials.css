@@ -1,0 +1,34 @@
+/* Position source-image surfaces; retain the existing responsive layout and hit targets. */
+.asset-backed{position:relative;isolation:isolate}
+.material-surface{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+.reference-scene .asset-backed>.reference-texture{display:none}
+.reference-scene .panel.asset-backed,.reference-scene #restore.asset-backed,.reference-scene #box.asset-backed,.reference-scene .deck-card.asset-backed{background:none;border-color:transparent}
+.reference-scene .deck-card.asset-backed{position:absolute}
+.reference-scene .keycap-nav .asset-keycap{background:none;border-color:transparent;box-shadow:none}
+.key-current,.key-pressed{display:none}.asset-keycap[aria-current=page]>.key-normal{display:none}.asset-keycap[aria-current=page]>.key-current{display:block}
+.asset-keycap[data-pressed=true]>.key-normal,.asset-keycap[data-pressed=true]>.key-current{display:none}.asset-keycap[data-pressed=true]>.key-pressed{display:block}
+.reference-scene .deck-card.front>span.asset-backed{background:none;border-color:transparent}
+.reference-scene .source-paperclip{border:0;box-shadow:none;background:none;transform:none;width:30px;height:52px;right:5px;top:20px}
+.source-paperclip svg{display:block;width:100%;height:100%}
+.reference-scene .reasoning-guidance,.reference-scene .final-deduction.is-locked{display:none}
+.reference-scene .timeline h3{font-size:16px;margin:12px 0 8px}.reference-scene .timeline li:last-child{margin-bottom:0}
+.reference-scene .deck-card:not(.front) .reasoning-photo{background:transparent;border:0;outline:0}
+.reference-scene .deck-card:not(.front)>span{width:54px;margin:0 0 8px;text-align:center;line-height:1.1}
+.reference-scene .deck-card[data-fan-side=right]:not(.front)>span{margin-left:auto}
+.reasoning-label{display:block;font:14px/1.2 SimSun,serif}.reasoning-number{display:block;font:27px/1.1 Georgia,serif}
+.reference-scene .deck-card:not(.front) .card-excerpt,.reference-scene .deck-card:not(.front)>small{display:none}
+@media(min-width:768px){.reference-scene #restoreBody{min-height:190px}}
+.material-surface,.source-paperclip svg{overflow:hidden}
+.assistant[data-state=reading] .source-screen-image{animation:scan 1.4s linear infinite}
+@media(max-width:767px){
+  .reference-scene .panel.asset-backed,.reference-scene #restore.asset-backed,.reference-scene #box.asset-backed{border-radius:2px;box-shadow:0 3px 8px #0003}
+  .reference-scene .deck-card.asset-backed{border-radius:2px;box-shadow:0 3px 5px #49382233}
+  .reference-scene .deck-card.front>span.asset-backed{padding:2px 9px;border-radius:0;font-family:SimSun,serif;font-size:14px}
+  .reference-scene .keycap-nav .asset-keycap{border:0;border-radius:2px;background:none;box-shadow:none;font-family:SimSun,serif}
+  .reference-scene .keycap-nav .asset-keycap[aria-current=page]{background:none;box-shadow:none}
+  .reference-scene .keycap-nav .asset-keycap:active,.reference-scene .keycap-nav .asset-keycap[data-pressed=true]{transform:translateY(3px)}
+  .reference-scene .paperclip.source-paperclip{display:block;right:5px;top:34px;width:25px;height:42px}
+  .reference-scene .deck-card:not(.front) .paperclip.source-paperclip{display:none}
+  .reference-scene .reasoning-photo{border-radius:0}
+  .reference-scene .assistant{border-radius:2px}
+}
